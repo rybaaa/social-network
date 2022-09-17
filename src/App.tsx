@@ -1,18 +1,17 @@
 import React from 'react';
 import './App.css';
-import Header from "./components/header/header";
-import Technologies from "./components/technologies/technologies";
+
+import {Nav} from "./components/Navbar/Nav";
+import {Profile} from "./components/Profile/Profile";
+import {Header} from "./components/Header/Header";
 
 
 function App() {
-    return (<div>
-            <Header title={ 'Home' }/>
-            <Header title={ 'News Feed' }/>
-            <Header title={'Messages'}/>
-            <Technologies title = {'html'}/>
-            <Technologies title = {'css'}/>
-            <Technologies title = {'ts'}/>
-            <Technologies title = {'react'}/>
+    return (<div className='app-wrapper'>
+            <Header
+                title={'https://dw0i2gv3d32l1.cloudfront.net/uploads/stage/stage_image/64230/optimized_large_thumb_stage.jpg'}/>
+            <Nav/>
+            <Profile title={'https://thumbs.dreamstime.com/b/landscape-nature-mountan-alps-rainbow-76824355.jpg'}/>
         </div>
     );
 }
