@@ -1,3 +1,7 @@
 .mypost_textarea {
     border-radius: 5px;
 }
+.button_area {
+    position: relative;
+    bottom: 5px;
+}

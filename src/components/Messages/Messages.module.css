@@ -1,0 +1,14 @@
+.dialogs {
+    display: grid;
+    grid-template-columns: 2fr 6fr;
+    padding: 15px;
+    font-size: 30px;
+
+}
+
+.dialogs .dialogItems .item a{
+    color:white;
+    text-decoration: none;
+}
+
+

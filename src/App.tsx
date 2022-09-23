@@ -4,16 +4,30 @@ import './App.css';
 import {Nav} from "./components/Navbar/Nav";
 import {Profile} from "./components/Profile/Profile";
 import {Header} from "./components/Header/Header";
+import {Messages} from "./components/Messages/Messages";
+import {BrowserRouter, Route} from "react-router-dom";
+import {Music} from "./components/Music/Music";
+import {News} from "./components/News/News";
+import {Settings} from "./components/Settings/Settings";
 
 
 function App() {
-    return (<div className='app-wrapper'>
-            <Header
-                title={'https://dw0i2gv3d32l1.cloudfront.net/uploads/stage/stage_image/64230/optimized_large_thumb_stage.jpg'}/>
-            <Nav/>
-            <Profile title={'https://thumbs.dreamstime.com/b/landscape-nature-mountan-alps-rainbow-76824355.jpg'}/>
-        </div>
+    return (
+        <BrowserRouter>
+            <div className='app-wrapper'>
+                <Header/>
+                <Nav/>
+                <div className='app-wrapper-content'>
+                    <Route path='/profile' component={Profile}/>
+                    <Route path='/messages' component={Messages}/>
+                    <Route path='/news' component={News}/>
+                    <Route path='/music' component={Music}/>
+                    <Route path='/settings' component={Settings}/>
+                </div>
+            </div>
+        </BrowserRouter>
     );
+
 }
 
 export default App;
