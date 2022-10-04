@@ -13,9 +13,6 @@ export const Profile = (props: MainPhotoType) => {
         <div>
             <ProfileInfo/>
             <MyPosts/>
-            <Post message={'Today is my birthday'} likes ={3}/>
-            <Post message={'Today is my birthday'} likes ={22}/>
-
         </div>
     )
 }
