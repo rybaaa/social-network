@@ -3,6 +3,7 @@
     background-color: moccasin;
     padding: 20px;
     font-size: 30px;
+    min-height: 100vh;
 }
 
 .item a{
@@ -12,4 +13,12 @@
 
 .item a.activeLink {
     color:sandybrown;
+}
+
+.friends {
+    margin-top: 100px;
+}
+
+.frienditem {
+    overflow: auto;
 }

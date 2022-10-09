@@ -3,9 +3,16 @@ import React from "react";
 
 export const ProfileInfo = () => {
     return (
-        <div>
-            <img className={s.img_profile} src='https://www.pngitem.com/pimgs/m/560-5603874_product-image-logo-avatar-minimalist-flat-line-hd.png'></img>
-            <h3>My first public page in social network</h3>
+        <div className={s.info}>
+            <img className={s.img_profile} src='https://www.svgrepo.com/show/120282/avatar.svg'></img>
+            <div>
+                <h3>My first public page in social network</h3>
+                <ul>
+                    <li>Name: Alex</li>
+                    <li>Y.O.: 25</li>
+                    <li>Country: Belarus</li>
+                </ul>
+            </div>
         </div>
     )
 }

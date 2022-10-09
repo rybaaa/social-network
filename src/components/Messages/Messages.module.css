@@ -1,14 +1,35 @@
 .dialogs {
-    display: grid;
-    grid-template-columns: 2fr 6fr;
-    padding: 15px;
-    font-size: 30px;
-
+    display: flex;
+}
+.dialogItems {
+    padding-right: 20px;
+    padding-top: 20px;
+    margin-left: 20px;
+    border-right: 1px solid black;
+    height: 100vh;
 }
 
-.dialogs .dialogItems .item a{
-    color:white;
-    text-decoration: none;
+.messagesItems{
+    margin-top: 20px;
+    font-size: 20px;
+    margin-left: 20px;
 }
 
+.messages {
+    width:auto;
+    border: 2px solid black;
+    border-radius: 10px;
+    margin-top: 25px;
+    background: cornsilk;
+}
+
+.block {
+    display: flex;
+    font-size: 20px;
+}
+
+.avatar {
+    width: 50px;
+    border-radius: 25px
+}
 

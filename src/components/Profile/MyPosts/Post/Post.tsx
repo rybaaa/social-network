@@ -1,20 +1,20 @@
 import React from "react";
 import s from './Post.module.css';
-
-type PostType = {
-    message: string
-    likes: number
-}
+import {postType} from "../../../../redux/state";
 
 
-export const Post = (props: PostType) => {
+export const Post = (props: postType) => {
     return (
-        <div>
+        <div className={s.postblock}>
             <img className={s.avatar}
-                 src='https://www.pngitem.com/pimgs/m/560-5603874_product-image-logo-avatar-minimalist-flat-line-hd.png'></img>
-            {props.message}
-            <div>
-                <span>{props.likes} likes</span>
+                 src='https://www.svgrepo.com/show/120282/avatar.svg'></img>
+            <div className={s.borderblock}>
+                <div className={s.post}>
+                    {props.post}
+                </div>
+                <div className={s.likes}>
+                    {props.likes} likes
+                </div>
             </div>
 
         </div>

@@ -1,18 +1,17 @@
 import React from "react";
-import s from './Profile.module.css';
 import {MyPosts} from "./MyPosts/MyPost";
-import {Post} from "./MyPosts/Post/Post";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
+import {ProfilePageType} from "../../redux/state";
 
-type MainPhotoType = {
-    title: string
+type StatePostType = {
+    state: ProfilePageType
 }
 
-export const Profile = (props: MainPhotoType) => {
+export const Profile = (props:StatePostType) => {
     return (
         <div>
             <ProfileInfo/>
-            <MyPosts/>
+            <MyPosts posts={props.state.posts}/>
         </div>
     )
 }
