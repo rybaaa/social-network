@@ -1,3 +1,5 @@
+import {renderTree} from "../render";
+
 export type postType = {
     id:number
     post:string
@@ -40,6 +42,19 @@ export type RootStateType = {
     sidebarPage:sidebarTypePage
 }
 
+export const addPost = (post:string) => {
+    state.profilePage.posts.push(
+        {id:3, post: post, likes:0}
+    )
+    renderTree(state)
+}
+
+export const addMessage = (message:string) => {
+    state.messagesPage.messages.push(
+        {id:5, message:message}
+    )
+    renderTree(state)
+}
 
 
 let state: RootStateType = {

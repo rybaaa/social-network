@@ -13,7 +13,7 @@ export const Post = (props: postType) => {
                     {props.post}
                 </div>
                 <div className={s.likes}>
-                    {props.likes} likes
+                    {props.likes} <img src='https://www.svgrepo.com/show/28731/like.svg'/>
                 </div>
             </div>
 

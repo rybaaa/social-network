@@ -19,6 +19,7 @@
 .borderblock {
     background: navajowhite;
     min-height: 50px;
+    min-width: 100px;
     margin-left: 10px;
     border: 3px solid black;
     border-radius: 10px;
@@ -31,4 +32,8 @@
 .likes {
     display: flex;
     justify-content: right;
+}
+
+.likes img {
+    width: 1em;
 }
