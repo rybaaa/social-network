@@ -1,4 +1,9 @@
-import {renderTree} from "../render";
+let renderTree = () => {
+}
+
+export const subscribe = (callback:()=>void) => {
+    renderTree = callback
+}
 
 export type postType = {
     id:number
@@ -7,6 +12,7 @@ export type postType = {
 }
 
 export type ProfilePageType = {
+    newText:string
     posts:postType[]
 }
 
@@ -46,19 +52,26 @@ export const addPost = (post:string) => {
     state.profilePage.posts.push(
         {id:3, post: post, likes:0}
     )
-    renderTree(state)
+    renderTree()
 }
 
 export const addMessage = (message:string) => {
     state.messagesPage.messages.push(
         {id:5, message:message}
     )
-    renderTree(state)
+    renderTree()
 }
+
+export const newTextCallback = (newtext:string) => {
+    state.profilePage.newText = newtext
+    renderTree()
+}
+
 
 
 let state: RootStateType = {
     profilePage: {
+        newText:'Hey',
         posts:[
             {id:1, post: 'Today is my birthday', likes: 3},
             {id:2, post: 'My first post', likes: 22}
@@ -89,6 +102,4 @@ let state: RootStateType = {
         ]
     }
 }
-
-
 export default state

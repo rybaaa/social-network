@@ -1,6 +1,5 @@
 import React from 'react';
 import './App.css';
-
 import {Nav} from "./components/Navbar/Nav";
 import {Profile} from "./components/Profile/Profile";
 import {Header} from "./components/Header/Header";
@@ -9,7 +8,7 @@ import {BrowserRouter, Route} from "react-router-dom";
 import {Music} from "./components/Music/Music";
 import {News} from "./components/News/News";
 import {Settings} from "./components/Settings/Settings";
-import state, {addMessage} from "./redux/state";
+import state, {addMessage, newTextCallback} from "./redux/state";
 import {addPost} from "./redux/state";
 
 function App() {
@@ -23,6 +22,8 @@ function App() {
                         <Profile
                             state={state.profilePage}
                             addPost={addPost}
+                            newText = {state.profilePage.newText}
+                            newTextCallback={newTextCallback}
                         />}/>
                     <Route path='/messages' render={() =>
                         <Messages
