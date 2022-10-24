@@ -8,10 +8,15 @@ import {BrowserRouter, Route} from "react-router-dom";
 import {Music} from "./components/Music/Music";
 import {News} from "./components/News/News";
 import {Settings} from "./components/Settings/Settings";
-import state, {addMessage, newTextCallback} from "./redux/state";
-import {addPost} from "./redux/state";
+import  {StoreType} from "./redux/state";
 
-function App() {
+
+type PropsType = {
+    store:StoreType
+}
+
+function App(props:PropsType) {
+    const state = props.store.getState()
     return (
         <BrowserRouter>
             <div className='app-wrapper'>
@@ -21,14 +26,14 @@ function App() {
                     <Route path='/profile' render={() =>
                         <Profile
                             state={state.profilePage}
-                            addPost={addPost}
+                            addPost={props.store.addPost.bind(props.store)}
                             newText = {state.profilePage.newText}
-                            newTextCallback={newTextCallback}
+                            newTextCallback={props.store.newTextCallback.bind(props.store)}
                         />}/>
                     <Route path='/messages' render={() =>
                         <Messages
                             state={state.messagesPage}
-                            addMessage={addMessage}
+                            addMessage={props.store.addMessage.bind(props.store)}
                         />}/>
                     <Route path='/news' render={() => <News/>}/>
                     <Route path='/music' render={() => <Music/>}/>

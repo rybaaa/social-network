@@ -1,6 +1,6 @@
 import React from 'react';
 import s from "../Messages.module.css";
-import state, {addMessage, messagesType} from "../../../redux/state";
+import state from "../../../redux/state";
 
 type addNewMessageType = {
     message: string
