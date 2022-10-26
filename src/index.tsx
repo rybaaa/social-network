@@ -6,7 +6,10 @@ import store from "./redux/state";
 
 const renderTree = () => {
     ReactDOM.render(
-        <App store={store} />,
+        <App
+            store={store}
+            dispatch = {store.dispatch.bind(store)}
+        />,
         document.getElementById('root')
     );
 }

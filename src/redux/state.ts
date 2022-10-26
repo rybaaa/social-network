@@ -41,14 +41,28 @@ export type RootStateType = {
     sidebarPage: sidebarTypePage
 }
 
+type AddPostActionType = {
+    type: 'ADD-POST'
+    post: string
+}
+type AddMessageActionType = {
+    type: 'ADD-MESSAGE'
+    message: string
+}
+type NewTextCallbackActionType = {
+    type: 'NEW-TEXT-CALLBACK'
+    newtext: string
+}
+
+export type ActionTypes = AddPostActionType | AddMessageActionType | NewTextCallbackActionType
+
+
 export type StoreType = {
     _state: RootStateType
-    addPost: (post: string) => void
-    addMessage: (message: string) => void
-    newTextCallback: (newtext: string) => void
     subscribe: (callback: () => void) => void
-    _renderTree:()=>void
-    getState:()=>RootStateType
+    _renderTree: () => void
+    getState: () => RootStateType
+    dispatch: (action: ActionTypes) => void
 }
 
 const store: StoreType = {
@@ -85,30 +99,30 @@ const store: StoreType = {
             ]
         }
     },
-    addPost(post: string) {
-        this._state.profilePage.posts.push(
-            {id: 3, post: post, likes: 0}
-        )
-        this._renderTree()
-    },
-    addMessage(message: string) {
-        this._state.messagesPage.messages.push(
-            {id: 5, message: message}
-        )
-        this._renderTree()
-    },
-    newTextCallback(newtext: string) {
-        this._state.profilePage.newText = newtext
-        this._renderTree()
+    _renderTree() {
+        console.log('state changed')
     },
     subscribe(callback: () => void) {
         this._renderTree = callback
     },
-    _renderTree() {
-        console.log('state changed')
-    },
     getState() {
         return this._state
+    },
+    dispatch(action) {
+        if (action.type === 'ADD-POST') {
+            this._state.profilePage.posts.push(
+                {id: 3, post: action.post, likes: 0}
+            )
+            this._renderTree()
+        } else if (action.type === 'ADD-MESSAGE') {
+            this._state.messagesPage.messages.push(
+                {id: 5, message: action.message}
+            )
+            this._renderTree()
+        } else if (action.type === 'NEW-TEXT-CALLBACK') {
+            this._state.profilePage.newText = action.newtext
+            this._renderTree()
+        }
     }
 }
 export default store

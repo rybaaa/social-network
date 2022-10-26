@@ -8,11 +8,12 @@ import {BrowserRouter, Route} from "react-router-dom";
 import {Music} from "./components/Music/Music";
 import {News} from "./components/News/News";
 import {Settings} from "./components/Settings/Settings";
-import  {StoreType} from "./redux/state";
+import {ActionTypes, StoreType} from "./redux/state";
 
 
 type PropsType = {
     store:StoreType
+    dispatch:(action:ActionTypes)=>void
 }
 
 function App(props:PropsType) {
@@ -26,14 +27,13 @@ function App(props:PropsType) {
                     <Route path='/profile' render={() =>
                         <Profile
                             state={state.profilePage}
-                            addPost={props.store.addPost.bind(props.store)}
-                            newText = {state.profilePage.newText}
-                            newTextCallback={props.store.newTextCallback.bind(props.store)}
+                            dispatch={props.dispatch}
+                            newText={state.profilePage.newText}
                         />}/>
                     <Route path='/messages' render={() =>
                         <Messages
                             state={state.messagesPage}
-                            addMessage={props.store.addMessage.bind(props.store)}
+                            dispatch={props.dispatch}
                         />}/>
                     <Route path='/news' render={() => <News/>}/>
                     <Route path='/music' render={() => <Music/>}/>

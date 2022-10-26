@@ -1,11 +1,12 @@
 import React from 'react';
 import s from "../Messages.module.css";
-import state from "../../../redux/state";
+import state, {ActionTypes} from "../../../redux/state";
 
 type addNewMessageType = {
     message: string
     id: number
-    addMessage: (message: string) => void
+    // addMessage: (message: string) => void
+    dispatch:(action:ActionTypes)=>void
 
 }
 
@@ -14,8 +15,7 @@ export const MessageItems = (props: addNewMessageType) => {
 
     const addMessage = () => {
         if (newMessage.current) {
-            props.addMessage(newMessage.current.value)
-            console.log(state)
+            props.dispatch({type: 'ADD-MESSAGE', message: newMessage.current.value})
         }
     }
     return (
