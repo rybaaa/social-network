@@ -1,7 +1,11 @@
 import React, {ChangeEvent} from "react";
 import s from './MyPost.module.css';
 import {Post} from "./Post/Post";
-import {ActionTypes, postType} from "../../../redux/state";
+import {
+    ActionTypes,
+    addPostAC, newTextCallbackAC,
+    postType
+} from "../../../redux/state";
 
 type MyPostsTypes = {
     newText:string
@@ -15,11 +19,11 @@ export const MyPosts = (props: MyPostsTypes) => {
     let postElement = props.posts.map(el => <Post id={el.id} post={el.post} likes={el.likes}/>)
 
     let addPost = () => {
-        props.dispatch( {type: 'ADD-POST', post: props.newText } )
-        props.dispatch(  {type:'NEW-TEXT-CALLBACK', newtext: ''})
+        props.dispatch( addPostAC(props.newText) )
+        props.dispatch(  newTextCallbackAC(''))
     }
 
-    const onChangeHandler = (e:ChangeEvent<HTMLTextAreaElement>)=>{props.dispatch({'type': 'NEW-TEXT-CALLBACK', newtext:e.currentTarget.value})}
+    const onChangeHandler = (e:ChangeEvent<HTMLTextAreaElement>)=>{props.dispatch(newTextCallbackAC(e.currentTarget.value))}
 
     return (
         <div>

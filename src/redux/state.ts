@@ -51,10 +51,14 @@ type AddMessageActionType = {
 }
 type NewTextCallbackActionType = {
     type: 'NEW-TEXT-CALLBACK'
-    newtext: string
+    newText: string
 }
 
-export type ActionTypes = AddPostActionType | AddMessageActionType | NewTextCallbackActionType
+export const addPostAC = (post:string) => ({type: 'ADD-POST', post} as const)
+export const newTextCallbackAC = (newText:string) => ({type:'NEW-TEXT-CALLBACK', newText} as const)
+export const addMessageAC = (message:string) => ({type:'ADD-MESSAGE', message} as const )
+
+export type ActionTypes = ReturnType<typeof addPostAC> | ReturnType<typeof addMessageAC> | ReturnType<typeof newTextCallbackAC>
 
 
 export type StoreType = {
@@ -120,7 +124,7 @@ const store: StoreType = {
             )
             this._renderTree()
         } else if (action.type === 'NEW-TEXT-CALLBACK') {
-            this._state.profilePage.newText = action.newtext
+            this._state.profilePage.newText = action.newText
             this._renderTree()
         }
     }
