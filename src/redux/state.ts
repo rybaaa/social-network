@@ -1,4 +1,6 @@
 import {v1} from "uuid";
+import {addPostAC, newTextCallbackAC, profileReducer} from "./profileReducer";
+import {addMessageAC, dialogsReducer, newMessageTextAC} from "./dialogsReducer";
 
 export type postType = {
     id: string
@@ -44,22 +46,11 @@ export type RootStateType = {
     sidebarPage: sidebarTypePage
 }
 
-const ADD_POST = 'ADD-POST'
-const ADD_MESSAGE = 'ADD-MESSAGE'
-const NEW_TEXT_CALLBACK = 'NEW-TEXT-CALLBACK'
-const NEW_MESSAGE_TEXT = 'NEW-MESSAGE-TEXT'
-
-export const addPostAC = (post: string) => ({type: ADD_POST, post} as const)
-export const newTextCallbackAC = (newText: string) => ({type: NEW_TEXT_CALLBACK, newText} as const)
-export const addMessageAC = (message: string) => ({type: ADD_MESSAGE, message} as const)
-export const newMessageTextAC = (newMessage: string) => ({type: NEW_MESSAGE_TEXT, newMessage} as const)
-
-
 export type ActionTypes =
     ReturnType<typeof addPostAC>
-    | ReturnType<typeof addMessageAC>
     | ReturnType<typeof newTextCallbackAC>
     | ReturnType<typeof newMessageTextAC>
+    | ReturnType<typeof addMessageAC>
 
 
 export type StoreType = {
@@ -115,23 +106,9 @@ const store: StoreType = {
         return this._state
     },
     dispatch(action) {
-        if (action.type === ADD_POST) {
-            this._state.profilePage.posts.push(
-                {id: v1(), post: action.post, likes: 0}
-            )
-            this._renderTree()
-        } else if (action.type === ADD_MESSAGE) {
-            this._state.messagesPage.messages.push(
-                {id: v1(), message: action.message}
-            )
-            this._renderTree()
-        } else if (action.type === NEW_TEXT_CALLBACK) {
-            this._state.profilePage.newText = action.newText
-            this._renderTree()
-        } else if (action.type === NEW_MESSAGE_TEXT) {
-            this._state.messagesPage.newMessage = action.newMessage
-            this._renderTree()
-        }
+        this._state.profilePage = profileReducer(this._state.profilePage, action)
+        this._state.messagesPage = dialogsReducer(this._state.messagesPage, action)
+        this._renderTree()
     }
 }
 export default store
