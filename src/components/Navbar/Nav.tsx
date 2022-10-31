@@ -11,7 +11,7 @@ type stateSidebarPage = {
 
 export const Nav = (props:stateSidebarPage) => {
 
-    let friend = props.state.friends.map((f) => <MyFriends id={f.id} name={f.name} avatar={f.avatar}/>)
+    let friend = props.state.friends.map((f) => <MyFriends key={f.id} id={f.id} name={f.name} avatar={f.avatar}/>)
 
     return (
         <nav className={s.nav}>

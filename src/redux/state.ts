@@ -1,5 +1,7 @@
+import {v1} from "uuid";
+
 export type postType = {
-    id: number
+    id: string
     post: string
     likes: number
 }
@@ -10,23 +12,24 @@ export type ProfilePageType = {
 }
 
 export type dialogsType = {
-    id: number
+    id: string
     name: string
     avatar: string
 }
 
 export type messagesType = {
-    id: number
+    id: string
     message: string
 }
 
 export type MessagesPageType = {
+    newMessage: string
     dialogs: dialogsType[]
     messages: messagesType[]
 }
 
 export type friendsType = {
-    id: number
+    id: string
     name: string
     avatar: string
 }
@@ -41,24 +44,22 @@ export type RootStateType = {
     sidebarPage: sidebarTypePage
 }
 
-type AddPostActionType = {
-    type: 'ADD-POST'
-    post: string
-}
-type AddMessageActionType = {
-    type: 'ADD-MESSAGE'
-    message: string
-}
-type NewTextCallbackActionType = {
-    type: 'NEW-TEXT-CALLBACK'
-    newText: string
-}
+const ADD_POST = 'ADD-POST'
+const ADD_MESSAGE = 'ADD-MESSAGE'
+const NEW_TEXT_CALLBACK = 'NEW-TEXT-CALLBACK'
+const NEW_MESSAGE_TEXT = 'NEW-MESSAGE-TEXT'
 
-export const addPostAC = (post:string) => ({type: 'ADD-POST', post} as const)
-export const newTextCallbackAC = (newText:string) => ({type:'NEW-TEXT-CALLBACK', newText} as const)
-export const addMessageAC = (message:string) => ({type:'ADD-MESSAGE', message} as const )
+export const addPostAC = (post: string) => ({type: ADD_POST, post} as const)
+export const newTextCallbackAC = (newText: string) => ({type: NEW_TEXT_CALLBACK, newText} as const)
+export const addMessageAC = (message: string) => ({type: ADD_MESSAGE, message} as const)
+export const newMessageTextAC = (newMessage: string) => ({type: NEW_MESSAGE_TEXT, newMessage} as const)
 
-export type ActionTypes = ReturnType<typeof addPostAC> | ReturnType<typeof addMessageAC> | ReturnType<typeof newTextCallbackAC>
+
+export type ActionTypes =
+    ReturnType<typeof addPostAC>
+    | ReturnType<typeof addMessageAC>
+    | ReturnType<typeof newTextCallbackAC>
+    | ReturnType<typeof newMessageTextAC>
 
 
 export type StoreType = {
@@ -74,32 +75,33 @@ const store: StoreType = {
         profilePage: {
             newText: 'Hey',
             posts: [
-                {id: 1, post: 'Today is my birthday', likes: 3},
-                {id: 2, post: 'My first post', likes: 22}
+                {id: v1(), post: 'Today is my birthday', likes: 3},
+                {id: v1(), post: 'My first post', likes: 22}
             ]
         },
         messagesPage: {
             dialogs: [
-                {id: 1, name: 'Mick', avatar: 'https://www.svgrepo.com/show/26325/avatar.svg'},
-                {id: 2, name: 'Alex', avatar: 'https://www.svgrepo.com/show/106358/avatar.svg'},
-                {id: 3, name: 'Max', avatar: 'https://www.svgrepo.com/show/113445/avatar.svg'},
-                {id: 4, name: 'Charles', avatar: 'https://www.svgrepo.com/show/63886/avatar.svg'}
+                {id: v1(), name: 'Mick', avatar: 'https://www.svgrepo.com/show/26325/avatar.svg'},
+                {id: v1(), name: 'Alex', avatar: 'https://www.svgrepo.com/show/106358/avatar.svg'},
+                {id: v1(), name: 'Max', avatar: 'https://www.svgrepo.com/show/113445/avatar.svg'},
+                {id: v1(), name: 'Charles', avatar: 'https://www.svgrepo.com/show/63886/avatar.svg'}
             ],
             messages: [
-                {id: 1, message: 'Hi'},
-                {id: 2, message: 'What is your aim?'},
-                {id: 3, message: 'Good Luck!'},
-                {id: 4, message: 'Have fun'}
-            ]
+                {id: v1(), message: 'Hi'},
+                {id: v1(), message: 'What is your aim?'},
+                {id: v1(), message: 'Good Luck!'},
+                {id: v1(), message: 'Have fun'}
+            ],
+            newMessage: ''
         },
         sidebarPage: {
             friends: [
-                {id: 1, name: 'Alex', avatar: 'https://www.svgrepo.com/show/106358/avatar.svg'},
-                {id: 2, name: 'Mick', avatar: 'https://www.svgrepo.com/show/26325/avatar.svg'},
-                {id: 3, name: 'John', avatar: 'https://www.svgrepo.com/show/113472/avatar.svg'},
-                {id: 4, name: 'Max', avatar: 'https://www.svgrepo.com/show/113445/avatar.svg'},
-                {id: 4, name: 'Charles', avatar: 'https://www.svgrepo.com/show/63886/avatar.svg'},
-                {id: 4, name: 'Pierre', avatar: 'https://www.svgrepo.com/show/83466/avatar.svg'}
+                {id: v1(), name: 'Alex', avatar: 'https://www.svgrepo.com/show/106358/avatar.svg'},
+                {id: v1(), name: 'Mick', avatar: 'https://www.svgrepo.com/show/26325/avatar.svg'},
+                {id: v1(), name: 'John', avatar: 'https://www.svgrepo.com/show/113472/avatar.svg'},
+                {id: v1(), name: 'Max', avatar: 'https://www.svgrepo.com/show/113445/avatar.svg'},
+                {id: v1(), name: 'Charles', avatar: 'https://www.svgrepo.com/show/63886/avatar.svg'},
+                {id: v1(), name: 'Pierre', avatar: 'https://www.svgrepo.com/show/83466/avatar.svg'}
             ]
         }
     },
@@ -113,18 +115,21 @@ const store: StoreType = {
         return this._state
     },
     dispatch(action) {
-        if (action.type === 'ADD-POST') {
+        if (action.type === ADD_POST) {
             this._state.profilePage.posts.push(
-                {id: 3, post: action.post, likes: 0}
+                {id: v1(), post: action.post, likes: 0}
             )
             this._renderTree()
-        } else if (action.type === 'ADD-MESSAGE') {
+        } else if (action.type === ADD_MESSAGE) {
             this._state.messagesPage.messages.push(
-                {id: 5, message: action.message}
+                {id: v1(), message: action.message}
             )
             this._renderTree()
-        } else if (action.type === 'NEW-TEXT-CALLBACK') {
+        } else if (action.type === NEW_TEXT_CALLBACK) {
             this._state.profilePage.newText = action.newText
+            this._renderTree()
+        } else if (action.type === NEW_MESSAGE_TEXT) {
+            this._state.messagesPage.newMessage = action.newMessage
             this._renderTree()
         }
     }

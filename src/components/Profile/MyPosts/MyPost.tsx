@@ -16,7 +16,7 @@ type MyPostsTypes = {
 }
 
 export const MyPosts = (props: MyPostsTypes) => {
-    let postElement = props.posts.map(el => <Post id={el.id} post={el.post} likes={el.likes}/>)
+    let postElement = props.posts.map(el => <Post key={el.id} id={el.id} post={el.post} likes={el.likes}/>)
 
     let addPost = () => {
         props.dispatch( addPostAC(props.newText) )
