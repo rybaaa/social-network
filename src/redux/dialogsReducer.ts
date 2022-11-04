@@ -1,10 +1,26 @@
-import {ActionTypes, MessagesPageType, ProfilePageType} from "./state";
+import {ActionTypes, MessagesPageType} from "./store";
 import {v1} from "uuid";
 
 const ADD_MESSAGE = 'ADD-MESSAGE'
 const NEW_MESSAGE_TEXT = 'NEW-MESSAGE-TEXT'
 
-export const dialogsReducer = (state: MessagesPageType, action: ActionTypes) => {
+let initialState = {
+    dialogs: [
+        {id: v1(), name: 'Mick', avatar: 'https://www.svgrepo.com/show/26325/avatar.svg'},
+        {id: v1(), name: 'Alex', avatar: 'https://www.svgrepo.com/show/106358/avatar.svg'},
+        {id: v1(), name: 'Max', avatar: 'https://www.svgrepo.com/show/113445/avatar.svg'},
+        {id: v1(), name: 'Charles', avatar: 'https://www.svgrepo.com/show/63886/avatar.svg'}
+    ],
+    messages: [
+        {id: v1(), message: 'Hi'},
+        {id: v1(), message: 'What is your aim?'},
+        {id: v1(), message: 'Good Luck!'},
+        {id: v1(), message: 'Have fun'}
+    ],
+    newMessage: ''
+}
+
+export const dialogsReducer = (state: MessagesPageType = initialState, action: ActionTypes) => {
     switch (action.type) {
         case ADD_MESSAGE:
             state.messages.push(

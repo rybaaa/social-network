@@ -1,10 +1,18 @@
-import {ActionTypes, ProfilePageType} from "./state";
+import {ActionTypes, ProfilePageType} from "./store";
 import {v1} from "uuid";
 
 const ADD_POST = 'ADD-POST'
 const NEW_TEXT_CALLBACK = 'NEW-TEXT-CALLBACK'
 
-export const profileReducer = (state: ProfilePageType, action: ActionTypes) => {
+let initialState ={
+    newText: 'Hey',
+    posts: [
+        {id: v1(), post: 'Today is my birthday', likes: 3},
+        {id: v1(), post: 'My first post', likes: 22}
+    ]
+}
+
+export const profileReducer = (state: ProfilePageType = initialState, action: ActionTypes) => {
     switch (action.type) {
         case ADD_POST:
             state.posts.push(

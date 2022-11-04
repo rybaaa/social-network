@@ -8,11 +8,12 @@ import {BrowserRouter, Route} from "react-router-dom";
 import {Music} from "./components/Music/Music";
 import {News} from "./components/News/News";
 import {Settings} from "./components/Settings/Settings";
-import {ActionTypes, StoreType} from "./redux/state";
+import {ActionTypes, StoreType} from "./redux/store";
+import {AppStoreType} from "./redux/redux-store";
 
 
 type PropsType = {
-    store:StoreType
+    store:AppStoreType
     dispatch:(action:ActionTypes)=>void
 }
 
@@ -22,7 +23,7 @@ function App(props:PropsType) {
         <BrowserRouter>
             <div className='app-wrapper'>
                 <Header/>
-                <Nav state={state.sidebarPage}/>
+                <Nav state={state.sidebar}/>
                 <div className='app-wrapper-content'>
                     <Route path='/profile' render={() =>
                         <Profile
@@ -32,7 +33,7 @@ function App(props:PropsType) {
                         />}/>
                     <Route path='/messages' render={() =>
                         <Messages
-                            state={state.messagesPage}
+                            state={state.dialogsPage}
                             dispatch={props.dispatch}
                         />}/>
                     <Route path='/news' render={() => <News/>}/>

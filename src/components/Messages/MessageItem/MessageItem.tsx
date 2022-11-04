@@ -1,6 +1,6 @@
 import React from 'react';
 import s from "../Messages.module.css";
-import {ActionTypes} from "../../../redux/state";
+import {ActionTypes} from "../../../redux/store";
 
 type addNewMessageType = {
     message: string

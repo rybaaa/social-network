@@ -1,7 +1,7 @@
 import React from "react";
 import s from './Nav.module.css';
 import {NavLink} from "react-router-dom";
-import {sidebarTypePage} from "../../redux/state";
+import {sidebarTypePage} from "../../redux/store";
 import {MyFriends} from "./MyFriends";
 
 type stateSidebarPage = {
