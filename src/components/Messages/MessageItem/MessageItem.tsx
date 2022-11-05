@@ -1,13 +1,9 @@
 import React from 'react';
 import s from "../Messages.module.css";
-import {ActionTypes} from "../../../redux/store";
 
 type addNewMessageType = {
     message: string
     id: string
-    // addMessage: (message: string) => void
-    dispatch:(action:ActionTypes)=>void
-
 }
 
 export const MessageItems = (props: addNewMessageType) => {
