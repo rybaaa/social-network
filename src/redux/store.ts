@@ -2,24 +2,24 @@ import {v1} from "uuid";
 import {addPostAC, newTextCallbackAC, profileReducer} from "./profileReducer";
 import {addMessageAC, dialogsReducer, newMessageTextAC} from "./dialogsReducer";
 
-export type postType = {
+type postType = {
     id: string
     post: string
     likes: number
 }
 
-export type ProfilePageType = {
+type ProfilePageType = {
     newText: string
     posts: postType[]
 }
 
-export type dialogsType = {
+type dialogsType = {
     id: string
     name: string
     avatar: string
 }
 
-export type messagesType = {
+type messagesType = {
     id: string
     message: string
 }

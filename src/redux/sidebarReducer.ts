@@ -1,5 +1,5 @@
 import {v1} from "uuid";
-import {ActionTypes, sidebarTypePage,} from "./store";
+import {ActionTypes, sidebarTypePage} from "./store";
 
 
 let initialState ={
