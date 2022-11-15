@@ -1,8 +1,16 @@
 import {v1} from "uuid";
-import {ActionTypes, sidebarTypePage} from "./store";
 
+export type friendsType = {
+    id: string
+    name: string
+    avatar: string
+}
 
-let initialState ={
+export type SidebarPageType = {
+    friends: friendsType[]
+}
+
+let initialState:SidebarPageType ={
     friends: [
         {id: v1(), name: 'Alex', avatar: 'https://www.svgrepo.com/show/106358/avatar.svg'},
         {id: v1(), name: 'Mick', avatar: 'https://www.svgrepo.com/show/26325/avatar.svg'},
@@ -13,9 +21,6 @@ let initialState ={
     ]
 }
 
-export const sidebarReducer = (state: sidebarTypePage = initialState, action: ActionTypes) => {
-    switch (action.type) {
-        default:
-            return state
-    }
+export const sidebarReducer = (state: SidebarPageType = initialState) => {
+    return state
 }

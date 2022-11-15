@@ -8,18 +8,16 @@ import {Music} from "./components/Music/Music";
 import {News} from "./components/News/News";
 import {Settings} from "./components/Settings/Settings";
 import {MessagesContainer} from "./components/Messages/MessagesContaier";
-import {AppStoreType} from "./redux/redux-store";
+import store, {AppStoreType} from "./redux/redux-store";
 
-type AppPropsType = {
-    store: AppStoreType
-}
 
-function App(props: AppPropsType) {
+
+function App() {
     return (
         <BrowserRouter>
             <div className='app-wrapper'>
                 <Header/>
-                <Nav state={props.store.sidebar}/>
+                <Nav friends={store.getState().sidebar.friends}/>
                 <div className='app-wrapper-content'>
                     <Route path='/profile' render={() =>
                         <Profile

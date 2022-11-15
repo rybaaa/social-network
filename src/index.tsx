@@ -5,14 +5,11 @@ import App from './App';
 import store from "./redux/redux-store";
 import {Provider} from "react-redux";
 
-const renderTree = () => {
-    ReactDOM.render(
-        <Provider store={store}>
-            <App store = {store.getState()}/>
-        </Provider>,
-        document.getElementById('root')
-    );
-}
-renderTree()
 
-store.subscribe(renderTree)
+ReactDOM.render(
+    <Provider store={store}>
+        <App/>
+    </Provider>,
+    document.getElementById('root')
+);
+

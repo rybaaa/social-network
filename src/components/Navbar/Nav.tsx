@@ -1,17 +1,13 @@
 import React from "react";
 import s from './Nav.module.css';
 import {NavLink} from "react-router-dom";
-import {sidebarTypePage} from "../../redux/store";
 import {MyFriends} from "./MyFriends";
-
-type stateSidebarPage = {
-    state:sidebarTypePage
-}
+import {SidebarPageType} from "../../redux/sidebarReducer";
 
 
-export const Nav = (props:stateSidebarPage) => {
+export const Nav = (props:SidebarPageType) => {
 
-    let friend = props.state.friends.map((f) => <MyFriends key={f.id} id={f.id} name={f.name} avatar={f.avatar}/>)
+    let friend = props.friends.map((f) => <MyFriends key={f.id} id={f.id} name={f.name} avatar={f.avatar}/>)
 
     return (
         <nav className={s.nav}>
