@@ -9,6 +9,7 @@ import {News} from "./components/News/News";
 import {Settings} from "./components/Settings/Settings";
 import {MessagesContainer} from "./components/Messages/MessagesContaier";
 import store, {AppStoreType} from "./redux/redux-store";
+import {UsersContainer} from "./components/Users/UsersContainer";
 
 
 
@@ -24,6 +25,7 @@ function App() {
                         />}/>
                     <Route path='/messages' render={() =>
                         <MessagesContainer/>}/>
+                    <Route path='/users' render={() => <UsersContainer/>}/>
                     <Route path='/news' render={() => <News/>}/>
                     <Route path='/music' render={() => <Music/>}/>
                     <Route path='/settings' render={() => <Settings/>}/>
