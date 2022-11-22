@@ -1,22 +1,20 @@
 import React from 'react';
 import {UsersPagePropsType} from "./UsersContainer";
 import s from './Users.module.css'
-import {v1} from "uuid";
+import axios from "axios";
+import avatar from '../../assets/img/avatar-svgrepo-com.svg'
 
 export const Users = (props: UsersPagePropsType) => {
     if (!props.users.length) {
-        props.setUsers([
-            {id:v1(), photoURL:'https://www.svgrepo.com/show/106358/avatar.svg',  name: 'Alex', status: 'Welcome', location : {city:'NY', country:'USA'}, followed: true},
-            {id:v1(), photoURL:'https://www.svgrepo.com/show/113445/avatar.svg', name: 'Max', status: 'Not great not terrible', location : {city:'Amsterdam', country:'Netherlands'}, followed: false},
-            {id:v1(), photoURL:'https://www.svgrepo.com/show/63886/avatar.svg', name: 'Charles', status: 'Yohoho', location : {city:'Monaco', country:'Monaco'}, followed: true}
-
-        ])
+        axios.get('https://social-network.samuraijs.com/api/1.0/users').then((response)=>{
+            props.setUsers(response.data.items)
+        })
     }
     return (
         <div>
             {props.users.map(u => <div key={u.id} className={s.block}>
                 <div className={s.avatar_btn_block}>
-                    <img src={u.photoURL}/>
+                    <img src={u.photos?.small === null? avatar : u.photos.small}/>
                     {u.followed
                         ? <button onClick={()=>{props.unfollow(u.id)} }>Unfollow</button>
                         : <button onClick={()=>{props.follow(u.id)}}>Follow</button>}
@@ -24,7 +22,7 @@ export const Users = (props: UsersPagePropsType) => {
                 <div className={s.user_block}>
                     <div className={s.user_block_info}>
                         <div>{u.name}</div>
-                        <div>{u.location.country},{u.location.city}</div>
+                        <div>{'u.location.country'},{'u.location.city'}</div>
                     </div>
                     <div>
                         <div className={s.status}>{u.status}</div>

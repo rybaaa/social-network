@@ -1,5 +1,3 @@
-import {v1} from "uuid";
-
 const FOLLOW = 'FOLLOW'
 const UNFOLLOW = 'UNFOLLOW'
 const SET_USERS = 'SET-USERS'
@@ -9,9 +7,14 @@ export type LocationType = {
     country: string
 }
 
+type PhotosType = {
+    small:string | null
+    large:string | null
+}
+
 export type UsersType = {
-    id: string
-    photoURL: string
+    id: number
+    photos:PhotosType
     name: string
     status: string
     location: LocationType
@@ -50,7 +53,7 @@ export const userReducer = (state: UsersPageType = initialState, action: ActionT
             return state
     }
 }
-export const followAC = (userID:string) => ({type: FOLLOW, userID} as const)
-export const unfollowAC = (userID:string) => ({type: UNFOLLOW, userID} as const)
+export const followAC = (userID:number) => ({type: FOLLOW, userID} as const)
+export const unfollowAC = (userID:number) => ({type: UNFOLLOW, userID} as const)
 export const setUsersAC = (users:UsersType[]) => ({type:SET_USERS, users} as const)
 
