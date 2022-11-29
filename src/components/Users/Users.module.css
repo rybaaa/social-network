@@ -1,6 +1,7 @@
 .block {
     margin: 20px;
     display: flex;
+    justify-content: center;
 }
 
 .avatar_btn_block {
@@ -24,13 +25,23 @@
     flex-direction: column;
     justify-content: space-between;
     font-size: 25px;
+    word-break: break-word;
 }
 
 .user_block_info {
     display: flex;
     justify-content: space-between;
+    padding: 0 10px;
 }
 .status {
     font-size: 15px;
     font-style: italic;
+}
+
+.pages {
+    display: flex;
+    justify-content: center;
+    gap:10px;
+    font-size: 25px;
+    padding: 20px;
 }

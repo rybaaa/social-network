@@ -15,7 +15,13 @@ export class Users extends React.Component <UsersPagePropsType> {
     render() {
         return (
             <div>
-                {this.props.users.map(u => <div key={u.id} className={s.block}>
+                <div className={s.pages}>
+                    <span>1</span>
+                    <span>2</span>
+                    <span>3</span>
+                    <span>4</span>
+                </div>
+                <div> {this.props.users.map(u => <div key={u.id} className={s.block}>
                     <div className={s.avatar_btn_block}>
                         <img src={u.photos?.small === null ? avatar : u.photos.small}/>
                         {u.followed
@@ -36,7 +42,9 @@ export class Users extends React.Component <UsersPagePropsType> {
                         </div>
                     </div>
                 </div>)}
+                </div>
             </div>
+
         );
     }
 };
