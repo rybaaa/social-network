@@ -6,20 +6,34 @@ import axios from "axios";
 
 export class Users extends React.Component <UsersPagePropsType> {
     componentDidMount() {
-        axios.get('https://social-network.samuraijs.com/api/1.0/users')
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pagesize}`)
+            .then(response => {
+                this.props.setUsers(response.data.items)
+                this.props.setTotalUsers(response.data.totalCount)
+            })
+    }
+    onPageChanged = (page:number)=> {
+        this.props.changePage(page);
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}$count=${this.props.pagesize}`)
             .then(response => {
                 this.props.setUsers(response.data.items)
             })
     }
 
+
     render() {
+        let pagesCount = Math.ceil(this.props.totalUsers / this.props.pagesize);
+        let pages = []
+        for (let i =1; i<=10; i++) {
+            pages.push(i)
+        }
         return (
             <div>
                 <div className={s.pages}>
-                    <span>1</span>
-                    <span>2</span>
-                    <span>3</span>
-                    <span>4</span>
+                    {pages.map(p=><span key={p} onClick={()=> {this.onPageChanged(p)}} className={this.props.currentPage===p? s.selectedPage:''}>{p}</span>)}
+                    {<span>...</span>}
+                    {<span key={pagesCount} onClick={()=>{this.onPageChanged(pagesCount)}} className={this.props.currentPage===pagesCount? s.selectedPage:''}>{pagesCount}</span>}
+
                 </div>
                 <div> {this.props.users.map(u => <div key={u.id} className={s.block}>
                     <div className={s.avatar_btn_block}>
