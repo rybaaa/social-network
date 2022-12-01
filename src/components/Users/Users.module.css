@@ -45,6 +45,10 @@
     font-size: 25px;
     padding: 20px;
 }
+.page{
+    cursor: pointer;
+}
 .selectedPage{
+    cursor: pointer;
     font-weight: bold;
 }
