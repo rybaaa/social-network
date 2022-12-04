@@ -2,6 +2,7 @@ import React from 'react';
 import s from './Users.module.css'
 import avatar from '../../assets/img/avatar-svgrepo-com.svg'
 import {UsersType} from "../../redux/userReducer";
+import {Preloader} from "../common/Preloader/Preloader";
 
 type UserPropsType = {
     totalUsers: number
@@ -11,6 +12,7 @@ type UserPropsType = {
     follow: (userID: number) => void
     unfollow: (userID: number) => void
     users:UsersType[]
+    isFetching: boolean
 }
 
 export const Users = (props:UserPropsType) => {
@@ -20,7 +22,7 @@ export const Users = (props:UserPropsType) => {
         pages.push(i)
     }
     return (
-        <div>
+        <div className={s.wrapper}> {props.isFetching? <Preloader/>: null}
             <div className={s.pages}>
                 {pages.map(p => <span key={p} onClick={() => {
                     props.onPageChanged(p)
@@ -45,7 +47,6 @@ export const Users = (props:UserPropsType) => {
                 <div className={s.user_block}>
                     <div className={s.user_block_info}>
                         <div>{u.name}</div>
-                        <div>{'u.location.country'},{'u.location.city'}</div>
                     </div>
                     <div>
                         <div className={s.status}>{u.status}</div>
