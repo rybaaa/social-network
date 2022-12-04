@@ -26,12 +26,12 @@
     justify-content: space-between;
     font-size: 25px;
     word-break: break-word;
+    padding: 0 10px;
 }
 
 .user_block_info {
     display: flex;
     justify-content: space-between;
-    padding: 0 10px;
 }
 .status {
     font-size: 15px;
