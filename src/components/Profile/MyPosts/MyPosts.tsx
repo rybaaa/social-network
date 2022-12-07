@@ -25,7 +25,7 @@ export const MyPosts = (props: ProfilePagePropsType) => {
     }
 
     return (
-        <div>
+        <div className={s.wrapper}>
             <div>
                 My Posts
             </div>

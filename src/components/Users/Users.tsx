@@ -3,6 +3,7 @@ import s from './Users.module.css'
 import avatar from '../../assets/img/avatar-svgrepo-com.svg'
 import {UsersType} from "../../redux/userReducer";
 import {Preloader} from "../common/Preloader/Preloader";
+import {NavLink} from "react-router-dom";
 
 type UserPropsType = {
     totalUsers: number
@@ -11,18 +12,18 @@ type UserPropsType = {
     onPageChanged: (page: number) => void
     follow: (userID: number) => void
     unfollow: (userID: number) => void
-    users:UsersType[]
+    users: UsersType[]
     isFetching: boolean
 }
 
-export const Users = (props:UserPropsType) => {
+export const Users = (props: UserPropsType) => {
     let pagesCount = Math.ceil(props.totalUsers / props.pagesize);
     let pages = []
     for (let i = 1; i <= 10; i++) {
         pages.push(i)
     }
     return (
-        <div className={s.wrapper}> {props.isFetching? <Preloader/>: null}
+        <div className={s.wrapper}> {props.isFetching ? <Preloader/> : null}
             <div className={s.pages}>
                 {pages.map(p => <span key={p} onClick={() => {
                     props.onPageChanged(p)
@@ -35,7 +36,9 @@ export const Users = (props:UserPropsType) => {
             </div>
             <div> {props.users.map(u => <div key={u.id} className={s.block}>
                 <div className={s.avatar_btn_block}>
-                    <img src={u.photos?.small === null ? avatar : u.photos.small}/>
+                    <NavLink to={'/profile/' + u.id} activeClassName={s.activeLink}>
+                        <img src={u.photos?.small === null ? avatar : u.photos.small}/>
+                    </NavLink>
                     {u.followed
                         ? <button onClick={() => {
                             props.unfollow(u.id)
