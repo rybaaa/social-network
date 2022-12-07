@@ -7,11 +7,31 @@ import {addPostAC, newTextCallbackAC, ProfilePageType, setUserProfileAC} from ".
 import {connect} from "react-redux";
 import {Dispatch} from "redux";
 import {Profile} from "./Profile";
+import {RouteComponentProps, withRouter} from "react-router-dom";
+
+type DispatchPropsType = {
+    addPost: (post:string) => void
+    newTextCallback:(newText: string) => void
+    setUserProfile : (profile:any) => void
+}
+
+type SecondaryProfilePagePropsType = ProfilePageType & DispatchPropsType
+
+type PathParamsType = {
+    userId: string,
+}
+
+// Your component own properties
+type PropsType = RouteComponentProps<PathParamsType> & SecondaryProfilePagePropsType
 
 
-export class ProfileApi extends React.Component<ProfilePagePropsType>{
+export class ProfileApi extends React.Component<PropsType>{
     componentDidMount() {
-        axios.get('https://social-network.samuraijs.com/api/1.0/profile/2')
+        let userId = this.props.match.params.userId
+        if (!userId){
+            userId = '2'
+        }
+        axios.get('https://social-network.samuraijs.com/api/1.0/profile/' + userId)
             .then(response => {
                 this.props.setUserProfile(response.data)
             })
@@ -23,11 +43,7 @@ export class ProfileApi extends React.Component<ProfilePagePropsType>{
     }
 }
 
-type DispatchPropsType = {
-    addPost: (post:string) => void
-    newTextCallback:(newText: string) => void
-    setUserProfile : (profile:any) => void
-}
+
 
 let mapStateToProps = (state: AppStoreType): ProfilePageType => {
     return {
@@ -50,6 +66,5 @@ let dispatchToProps = (dispatch: Dispatch): DispatchPropsType => {
     }
 }
 
-type ProfilePagePropsType = ProfilePageType & DispatchPropsType
 
-export const ProfileContainer = connect(mapStateToProps, dispatchToProps)(ProfileApi)
+export const ProfileContainer = connect(mapStateToProps, dispatchToProps)(withRouter(ProfileApi))
