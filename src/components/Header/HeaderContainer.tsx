@@ -13,8 +13,11 @@ type MapDispatchToPropsType = {
     setUserData: (data: UserDataType) => void
 }
 type AuthType = MapStateToPropsType & MapDispatchToPropsType
-const settings = {
-    withCredentials:true
+export const settings = {
+    withCredentials:true,
+    headers: {
+        'API-KEY': '7fd04dfe-8629-4bd4-9c12-9366ee505d1c'
+    }
 }
 
 class HeaderContainer extends React.Component<AuthType> {
