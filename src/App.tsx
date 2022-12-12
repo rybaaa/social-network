@@ -1,16 +1,15 @@
 import React from 'react';
 import './App.css';
 import {Nav} from "./components/Navbar/Nav";
-import {Profile} from "./components/Profile/Profile";
-import {Header} from "./components/Header/Header";
 import {BrowserRouter, Route} from "react-router-dom";
 import {Music} from "./components/Music/Music";
 import {News} from "./components/News/News";
 import {Settings} from "./components/Settings/Settings";
 import {MessagesContainer} from "./components/Messages/MessagesContaier";
-import store, {AppStoreType} from "./redux/redux-store";
+import store from "./redux/redux-store";
 import {UsersContainer} from "./components/Users/UsersContainer";
 import {ProfileContainer} from "./components/Profile/ProfileContainer";
+import HeaderContainer from "./components/Header/HeaderContainer";
 
 
 
@@ -18,7 +17,7 @@ function App() {
     return (
         <BrowserRouter>
             <div className='app-wrapper'>
-                <Header/>
+                <HeaderContainer/>
                 <Nav friends={store.getState().sidebar.friends}/>
                 <div className='app-wrapper-content'>
                     <Route path='/profile/:userId?' render={() =>
