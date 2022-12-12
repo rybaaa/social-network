@@ -26,7 +26,7 @@ export type UsersType = {
 
 export type UsersPageType = {
     users: UsersType[]
-    pagesize:number
+    pageSize:number
     totalUsers:number,
     currentPage:number
     isFetching:boolean
@@ -34,7 +34,7 @@ export type UsersPageType = {
 
 let initialState: UsersPageType = {
     users:[],
-    pagesize:50,
+    pageSize:50,
     totalUsers:0,
     currentPage:1,
     isFetching:false

@@ -10,8 +10,7 @@ import {
     UsersType
 } from "../../redux/userReducer";
 import {Users} from "./Users";
-import axios from "axios";
-import {settings} from "../Header/HeaderContainer";
+import {usersAPI} from "../../api/api";
 
 type MapStateToPropsType = {
     users: UsersType[]
@@ -34,21 +33,21 @@ export type UsersPagePropsType = MapStateToPropsType & DispatchToPropsType
 export class UsersAPI extends React.Component <UsersPagePropsType> {
     componentDidMount() {
         this.props.toggleIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pagesize}`, settings)
-            .then(response => {
+        usersAPI.getUsers(this.props.currentPage, this.props.pagesize)
+            .then(data => {
                 this.props.toggleIsFetching(false)
-                this.props.setUsers(response.data.items)
-                this.props.setTotalUsers(response.data.totalCount)
+                this.props.setUsers(data.items)
+                this.props.setTotalUsers(data.totalCount)
             })
     }
 
     onPageChanged = (page: number) => {
         this.props.toggleIsFetching(true)
         this.props.changePage(page);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pagesize}`, settings)
-            .then(response => {
+        usersAPI.getUsers(page, this.props.pagesize)
+            .then(data => {
                 this.props.toggleIsFetching(false)
-                this.props.setUsers(response.data.items)
+                this.props.setUsers(data.items)
             })
     }
 
@@ -56,7 +55,7 @@ export class UsersAPI extends React.Component <UsersPagePropsType> {
     render() {
         return (
             <Users totalUsers={this.props.totalUsers}
-                   pagesize={this.props.pagesize}
+                   pageSize={this.props.pagesize}
                    currentPage = {this.props.currentPage}
                    onPageChanged = {this.onPageChanged}
                    follow = {this.props.follow}
@@ -72,7 +71,7 @@ export class UsersAPI extends React.Component <UsersPagePropsType> {
 let mapStateToProps = (state: AppStoreType): MapStateToPropsType => {
     return {
         users: state.usersPage.users,
-        pagesize: state.usersPage.pagesize,
+        pagesize: state.usersPage.pageSize,
         totalUsers: state.usersPage.totalUsers,
         currentPage: state.usersPage.currentPage,
         isFetching:state.usersPage.isFetching
