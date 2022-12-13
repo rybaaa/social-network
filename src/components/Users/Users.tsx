@@ -15,6 +15,8 @@ type UserPropsType = {
     unfollow: (userID: number) => void
     users: UsersType[]
     isFetching: boolean
+    isFollowing: Array<number>
+    toggleIsFollowing: (isFollowing: boolean, userId:number) => void
 }
 
 export const Users = (props: UserPropsType) => {
@@ -41,20 +43,24 @@ export const Users = (props: UserPropsType) => {
                         <img src={u.photos?.small === null ? avatar : u.photos.small}/>
                     </NavLink>
                     {u.followed
-                        ? <button onClick={() => {
+                        ? <button disabled={props.isFollowing.some(el=>el === u.id)} onClick={() => {
+                            props.toggleIsFollowing(true, u.id)
                             usersAPI.unfollowUser(u.id)
                                 .then((data) => {
                                     if (data.resultCode === 0) {
                                         props.unfollow(u.id)
                                     }
+                                    props.toggleIsFollowing(false, u.id)
                                 })
                         }}>Unfollow</button>
-                        : <button onClick={() => {
+                        : <button disabled={props.isFollowing.some(el=>el === u.id)} onClick={() => {
+                            props.toggleIsFollowing(true, u.id)
                             usersAPI.followUser(u.id)
                                 .then((data) => {
                                     if (data.resultCode === 0) {
                                         props.follow(u.id)
                                     }
+                                    props.toggleIsFollowing(false, u.id)
                                 })
                         }}>Follow</button>}
                 </div>
