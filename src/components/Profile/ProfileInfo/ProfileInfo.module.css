@@ -20,6 +20,12 @@
 }
 .job_checked{
     display: flex;
+    gap: 10px;
+}
+.img {
+    width: 20px;
 }
 .img_profile {
+    width: 250px;
+    height: 250px;
 }

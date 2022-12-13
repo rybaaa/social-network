@@ -25,7 +25,7 @@ type ContactType = {
     youtube:string
 }
 
-type ProfileType = {
+export type ProfileType = {
     photos: PhotoType
     aboutMe: string
     fullName: string
@@ -75,4 +75,4 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Ac
 }
 export const addPostAC = (post: string) => ({type: ADD_POST, post} as const)
 export const newTextCallbackAC = (newText: string) => ({type: NEW_POST_UPDATE_TEXT, newText} as const)
-export const setUserProfileAC = (profile: any) => ({type: SET_USER_PROFILE, profile} as const)
+export const setUserProfileAC = (profile: ProfileType) => ({type: SET_USER_PROFILE, profile} as const)

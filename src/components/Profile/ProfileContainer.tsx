@@ -1,6 +1,4 @@
 import React from "react";
-import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
-import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
 import axios from "axios";
 import {AppStoreType} from "../../redux/redux-store";
 import {addPostAC, newTextCallbackAC, ProfilePageType, setUserProfileAC} from "../../redux/profileReducer";
@@ -29,7 +27,7 @@ export class ProfileApi extends React.Component<PropsType>{
     componentDidMount() {
         let userId = this.props.match.params.userId
         if (!userId){
-            userId = '2'
+            userId = '26681'
         }
         axios.get('https://social-network.samuraijs.com/api/1.0/profile/' + userId)
             .then(response => {

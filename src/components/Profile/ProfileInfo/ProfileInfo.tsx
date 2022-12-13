@@ -4,6 +4,7 @@ import {ProfilePageType} from "../../../redux/profileReducer";
 import {Preloader} from "../../common/Preloader/Preloader";
 import checked from '../../../assets/img/checkbox-checked-svgrepo-com.svg'
 import unchecked from '../../../assets/img/unchecked-svgrepo-com.svg'
+import avatar from '../../../assets/img/avatar-svgrepo-com.svg'
 
 export const ProfileInfo = (props: ProfilePageType) => {
     if (!props.profile) {
@@ -12,7 +13,8 @@ export const ProfileInfo = (props: ProfilePageType) => {
     return (
         <div className={s.info}>
             <div>
-                <img className={s.img_profile} src={props.profile.photos.large}></img>
+                <img className={s.img_profile}
+                     src={props.profile.photos.large == null? avatar : props.profile.photos.large}></img>
             </div>
             <div>
                 <h3>{props.profile.fullName}</h3>
@@ -29,7 +31,8 @@ export const ProfileInfo = (props: ProfilePageType) => {
                 </ul>
             </div>
             <div className={s.job}>
-                <div className={s.job_checked}>Looking for a job: {props.profile.lookingForAJob? <img src={checked}/>: <img src={unchecked}/>} </div>
+                <div className={s.job_checked}>Looking for a job: {props.profile.lookingForAJob ?
+                    <img className={s.img} src={checked}/> : <img className={s.img} src={unchecked}/>} </div>
                 <div>My description: {props.profile.lookingForAJobDescription}</div>
             </div>
         </div>
