@@ -3,14 +3,13 @@ import {connect} from "react-redux";
 import {AppStoreType} from "../../redux/redux-store";
 import {
     changePage,
-    follow,
+    follow, getUsersThuncCreator,
     setTotalUsers,
     setUsers, toggleIsFetching, toggleIsFollowingInProgress,
     unfollow,
     UsersType
 } from "../../redux/userReducer";
 import {Users} from "./Users";
-import {usersAPI} from "../../api/api";
 
 type MapStateToPropsType = {
     users: UsersType[]
@@ -28,32 +27,19 @@ type DispatchToPropsType = {
     setTotalUsers: (count: number) => void
     toggleIsFetching: (isFetching:boolean) => void
     toggleIsFollowingInProgress:(isFollowing:boolean, userId:number) => void
+    getUsers:(currentPage:number, pagesize:number)=>void
 }
 
 export type UsersPagePropsType = MapStateToPropsType & DispatchToPropsType
 
 export class UsersAPI extends React.Component <UsersPagePropsType> {
     componentDidMount() {
-        this.props.toggleIsFetching(true)
-        usersAPI.getUsers(this.props.currentPage, this.props.pagesize)
-            .then(data => {
-                this.props.toggleIsFetching(false)
-                this.props.setUsers(data.items)
-                this.props.setTotalUsers(data.totalCount)
-            })
+        this.props.getUsers(this.props.currentPage, this.props.pagesize)
     }
 
     onPageChanged = (page: number) => {
-        this.props.toggleIsFetching(true)
-        this.props.changePage(page);
-        usersAPI.getUsers(page, this.props.pagesize)
-            .then(data => {
-                this.props.toggleIsFetching(false)
-                this.props.setUsers(data.items)
-            })
+        this.props.getUsers(page, this.props.pagesize)
     }
-
-
     render() {
         return (
             <Users totalUsers={this.props.totalUsers}
@@ -113,6 +99,7 @@ export const UsersContainer = connect(mapStateToProps, {
     changePage,
     setTotalUsers,
     toggleIsFetching,
-    toggleIsFollowingInProgress
+    toggleIsFollowingInProgress,
+    getUsers:getUsersThuncCreator
 })(UsersAPI)
 

@@ -1,16 +1,16 @@
 import React from "react";
-import axios from "axios";
 import {AppStoreType} from "../../redux/redux-store";
-import {addPostAC, newTextCallbackAC, ProfilePageType, setUserProfileAC} from "../../redux/profileReducer";
+import {addPostAC, newTextCallbackAC, ProfilePageType, ProfileType, setUserProfileAC} from "../../redux/profileReducer";
 import {connect} from "react-redux";
 import {Dispatch} from "redux";
 import {Profile} from "./Profile";
 import {RouteComponentProps, withRouter} from "react-router-dom";
+import {usersAPI} from "../../api/api";
 
 type DispatchPropsType = {
     addPost: (post:string) => void
     newTextCallback:(newText: string) => void
-    setUserProfile : (profile:any) => void
+    setUserProfile : (profile:ProfileType) => void
 }
 
 type SecondaryProfilePagePropsType = ProfilePageType & DispatchPropsType
@@ -29,9 +29,9 @@ export class ProfileApi extends React.Component<PropsType>{
         if (!userId){
             userId = '26681'
         }
-        axios.get('https://social-network.samuraijs.com/api/1.0/profile/' + userId)
+        usersAPI.getProfile(+userId)
             .then(response => {
-                this.props.setUserProfile(response.data)
+                this.props.setUserProfile(response)
             })
     }
     render() {

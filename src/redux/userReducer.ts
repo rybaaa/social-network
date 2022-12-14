@@ -1,3 +1,6 @@
+import {usersAPI} from "../api/api";
+import {Dispatch} from "redux";
+
 const FOLLOW = 'FOLLOW'
 const UNFOLLOW = 'UNFOLLOW'
 const SET_USERS = 'SET-USERS'
@@ -102,4 +105,15 @@ export const toggleIsFollowingInProgress = (isFollowing: boolean, userId: number
     isFollowing,
     userId
 } as const)
-
+export const getUsersThuncCreator = (currentPage: number, pageSize: number) => {
+    return (dispatch: Dispatch) => {
+        dispatch(toggleIsFetching(true))
+        usersAPI.getUsers(currentPage, pageSize)
+            .then(data => {
+                dispatch(toggleIsFetching(false))
+                dispatch(setUsers(data.items))
+                dispatch(setTotalUsers(data.totalCount))
+                dispatch(changePage(currentPage))
+            })
+    }
+}
