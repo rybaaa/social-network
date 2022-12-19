@@ -1,6 +1,6 @@
 import React from "react";
 import {Header} from "./Header";
-import {authTC, setAvatar, setUserData, UserDataType} from "../../redux/authReducer";
+import {authTC} from "../../redux/authReducer";
 import {connect} from "react-redux";
 import {AppStoreType} from "../../redux/redux-store";
 
@@ -12,8 +12,6 @@ type MapStateToPropsType = {
     avatar: string
 }
 type MapDispatchToPropsType = {
-    setUserData: (data: UserDataType) => void
-    setAvatar: (avatar: string) => void
     authTC: () => void
 }
 type AuthType = MapStateToPropsType & MapDispatchToPropsType
@@ -37,5 +35,5 @@ let mapStateToProps = (state: AppStoreType): MapStateToPropsType => {
     }
 }
 
-export default connect(mapStateToProps, {setUserData, setAvatar, authTC})(HeaderContainer)
+export default connect(mapStateToProps, {authTC})(HeaderContainer)
 

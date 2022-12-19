@@ -1,21 +1,11 @@
 import React from "react";
 import {AppStoreType} from "../../redux/redux-store";
-import {
-    addPostAC,
-    getProfileTC,
-    newTextCallbackAC,
-    ProfilePageType,
-    ProfileType,
-    setUserProfileAC
-} from "../../redux/profileReducer";
+import {getProfileTC,ProfilePageType,} from "../../redux/profileReducer";
 import {connect} from "react-redux";
 import {Profile} from "./Profile";
 import {RouteComponentProps, withRouter} from "react-router-dom";
 
 type DispatchPropsType = {
-    addPostAC: (post: string) => void
-    newTextCallbackAC: (newText: string) => void
-    setUserProfileAC: (profile: ProfileType) => void
     getProfileTC: (userId: number) => void
 }
 
@@ -67,9 +57,4 @@ let mapStateToProps = (state: AppStoreType): ProfilePageType => {
 // }
 
 
-export default connect(mapStateToProps, {
-    addPostAC,
-    newTextCallbackAC,
-    setUserProfileAC,
-    getProfileTC
-})(withRouter(ProfileContainer))
+export default connect(mapStateToProps, {getProfileTC})(withRouter(ProfileContainer))

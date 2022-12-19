@@ -49,9 +49,8 @@ export const authTC = () => {
         usersAPI.authMe()
             .then(data => {
                 if (data.resultCode === 0) {
-                    dispatch(setUserData(data))
+                    dispatch(setUserData(data.data))
                 }
-                console.log(data.data.id)
                 return usersAPI.getProfile(data.data.id)
             })
             .then(data => {
