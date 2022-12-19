@@ -4,39 +4,11 @@ import {Messages} from "./Messages";
 import {connect} from "react-redux";
 import {Dispatch} from "redux";
 import {AppStoreType} from "../../redux/redux-store";
-//
-// type stateMessagesType = {
-//     store: AppStoreType
-// }
-
-// export const MessagesContainer = (props: stateMessagesType) => {
-//     let state = props.store.getState().dialogsPage
-//
-//     const addMessage = (message:string) => {
-//         if (message !== '') {
-//             props.store.dispatch(addMessageAC(message))
-//             props.store.dispatch(newMessageTextAC(''))
-//         } else {
-//             alert('Edit Message')
-//         }
-//     }
-//     const onChangeHandler = (text:string) => {
-//         props.store.dispatch(newMessageTextAC(text))
-//     }
-//
-//     return (
-//         <div className={s.dialogs}>
-//             <Messages
-//                 state = {state}
-//                 addMessage={addMessage}
-//                 onChangeHandler={onChangeHandler}
-//             />
-//         </div>
-//     )
-// }
+import {UserDataType} from "../../redux/authReducer";
 
 type MapStatePropsType = {
     dialogsPage: DialogsPageType
+    isAuth: UserDataType
 }
 
 type MapDispatchPropsType = {
@@ -48,7 +20,8 @@ export type MessagesPropsType = MapStatePropsType & MapDispatchPropsType
 
 let mapStateToProps = (state: AppStoreType): MapStatePropsType => {
     return {
-        dialogsPage: state.dialogsPage
+        dialogsPage: state.dialogsPage,
+        isAuth:state.auth
     }
 }
 

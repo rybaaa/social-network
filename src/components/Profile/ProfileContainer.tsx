@@ -1,15 +1,22 @@
 import React from "react";
 import {AppStoreType} from "../../redux/redux-store";
-import {getProfileTC,ProfilePageType,} from "../../redux/profileReducer";
+import {getProfileTC, postType, ProfileType,} from "../../redux/profileReducer";
 import {connect} from "react-redux";
 import {Profile} from "./Profile";
-import {RouteComponentProps, withRouter} from "react-router-dom";
+import {Redirect, RouteComponentProps, withRouter} from "react-router-dom";
 
 type DispatchPropsType = {
     getProfileTC: (userId: number) => void
 }
 
-type SecondaryProfilePagePropsType = ProfilePageType & DispatchPropsType
+type MapStateToPropsType = {
+    newText: string
+    posts: postType[]
+    profile: ProfileType
+    isAuth:boolean
+}
+
+type SecondaryProfilePagePropsType = MapStateToPropsType & DispatchPropsType
 
 type PathParamsType = {
     userId: string,
@@ -29,17 +36,19 @@ class ProfileContainer extends React.Component<PropsType> {
     }
 
     render() {
+        if (!this.props.isAuth) return <Redirect to={'/login'}/>
         return (
             <Profile {...this.props}/>
         )
     }
 }
 
-let mapStateToProps = (state: AppStoreType): ProfilePageType => {
+let mapStateToProps = (state: AppStoreType): MapStateToPropsType => {
     return {
         newText: state.profilePage.newText,
         posts: state.profilePage.posts,
-        profile: state.profilePage.profile
+        profile: state.profilePage.profile,
+        isAuth:state.auth.isAuth
     }
 }
 // let dispatchToProps = (dispatch: Dispatch): DispatchPropsType => {

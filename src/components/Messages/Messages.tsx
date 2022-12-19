@@ -2,7 +2,8 @@ import React, {ChangeEvent} from "react";
 import s from './Messages.module.css'
 import {DialogsItem} from "./DialogsItem/DialogsItem";
 import {MessageItems} from "./MessageItem/MessageItem";
-import {MessagesPropsType} from "./MessagesContaier";
+import {MessagesPropsType} from "./MessagesContainer";
+import {Redirect} from "react-router-dom";
 
 
 // type stateMessagesType = {
@@ -37,6 +38,8 @@ export const Messages = (props: MessagesPropsType) => {
         ></textarea>
         <button onClick={addMessage}>Send</button>
     </div>
+
+    if(!props.isAuth.isAuth) return <Redirect to={'/login'}/>
 
     return (
         <div className={s.dialogs}>
