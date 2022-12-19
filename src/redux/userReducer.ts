@@ -105,7 +105,7 @@ export const toggleIsFollowingInProgress = (isFollowing: boolean, userId: number
     isFollowing,
     userId
 } as const)
-export const getUsersThuncCreator = (currentPage: number, pageSize: number) => {
+export const getUsersTC = (currentPage: number, pageSize: number) => {
     return (dispatch: Dispatch) => {
         dispatch(toggleIsFetching(true))
         usersAPI.getUsers(currentPage, pageSize)
@@ -114,6 +114,30 @@ export const getUsersThuncCreator = (currentPage: number, pageSize: number) => {
                 dispatch(setUsers(data.items))
                 dispatch(setTotalUsers(data.totalCount))
                 dispatch(changePage(currentPage))
+            })
+    }
+}
+export const setUnfollowTC = (id: number) => {
+    return (dispatch: Dispatch) => {
+        dispatch(toggleIsFollowingInProgress(true, id))
+        usersAPI.unfollowUser(id)
+            .then((data) => {
+                if (data.resultCode === 0) {
+                    dispatch(unfollow(id))
+                }
+                dispatch(toggleIsFollowingInProgress(false, id))
+            })
+    }
+}
+export const setFollowTC = (id: number) => {
+    return (dispatch: Dispatch) => {
+        dispatch(toggleIsFollowingInProgress(true, id))
+        usersAPI.followUser(id)
+            .then((data) => {
+                if (data.resultCode === 0) {
+                    dispatch(follow(id))
+                }
+                dispatch(toggleIsFollowingInProgress(false, id))
             })
     }
 }

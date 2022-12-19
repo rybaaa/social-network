@@ -1,3 +1,6 @@
+import {Dispatch} from "redux";
+import {usersAPI} from "../api/api";
+import avatar from '../assets/img/avatar-svgrepo-com.svg'
 const SET_USER_DATA = 'SET_USER_DATA'
 const SET_AVATAR = 'SET_AVATAR'
 
@@ -40,5 +43,23 @@ export const authReducer = (state: UserDataType = initialState, action: ActionTy
 }
 export const setUserData = (data: UserDataType) => ({type: SET_USER_DATA, data} as const)
 export const setAvatar = (avatar: string) => ({type: SET_AVATAR, avatar} as const)
+
+export const authTC = () => {
+    return (dispatch: Dispatch) => {
+        usersAPI.authMe()
+            .then(data => {
+                if (data.resultCode === 0) {
+                    dispatch(setUserData(data))
+                }
+                console.log(data.data.id)
+                return usersAPI.getProfile(data.data.id)
+            })
+            .then(data => {
+                dispatch(setAvatar(data.photos.small === null
+                    ? avatar
+                    : data.photos.small))
+            })
+    }
+}
 
 

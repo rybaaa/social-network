@@ -1,4 +1,6 @@
 import {v1} from "uuid";
+import {Dispatch} from "redux";
+import {usersAPI} from "../api/api";
 
 const ADD_POST = 'ADD-POST'
 const NEW_POST_UPDATE_TEXT = 'NEW-POST-UPDATE-TEXT'
@@ -76,3 +78,12 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Ac
 export const addPostAC = (post: string) => ({type: ADD_POST, post} as const)
 export const newTextCallbackAC = (newText: string) => ({type: NEW_POST_UPDATE_TEXT, newText} as const)
 export const setUserProfileAC = (profile: ProfileType) => ({type: SET_USER_PROFILE, profile} as const)
+
+export const getProfileTC = (id:number) => {
+    return (dispatch: Dispatch) => {
+        usersAPI.getProfile(id)
+            .then(res=>{
+                dispatch(setUserProfileAC(res))
+            })
+    }
+}

@@ -4,19 +4,17 @@ import avatar from '../../assets/img/avatar-svgrepo-com.svg'
 import {UsersType} from "../../redux/userReducer";
 import {Preloader} from "../common/Preloader/Preloader";
 import {NavLink} from "react-router-dom";
-import {usersAPI} from "../../api/api";
 
 type UserPropsType = {
     totalUsers: number
     pageSize: number
     currentPage: number
     onPageChanged: (page: number) => void
-    follow: (userID: number) => void
-    unfollow: (userID: number) => void
     users: UsersType[]
     isFetching: boolean
     isFollowing: Array<number>
-    toggleIsFollowing: (isFollowing: boolean, userId:number) => void
+    setFollow: (id: number) => void
+    setUnfollow: (id: number) => void
 }
 
 export const Users = (props: UserPropsType) => {
@@ -43,25 +41,11 @@ export const Users = (props: UserPropsType) => {
                         <img src={u.photos?.small === null ? avatar : u.photos.small}/>
                     </NavLink>
                     {u.followed
-                        ? <button disabled={props.isFollowing.some(el=>el === u.id)} onClick={() => {
-                            props.toggleIsFollowing(true, u.id)
-                            usersAPI.unfollowUser(u.id)
-                                .then((data) => {
-                                    if (data.resultCode === 0) {
-                                        props.unfollow(u.id)
-                                    }
-                                    props.toggleIsFollowing(false, u.id)
-                                })
+                        ? <button disabled={props.isFollowing.some(el => el === u.id)} onClick={() => {
+                            props.setUnfollow(u.id)
                         }}>Unfollow</button>
-                        : <button disabled={props.isFollowing.some(el=>el === u.id)} onClick={() => {
-                            props.toggleIsFollowing(true, u.id)
-                            usersAPI.followUser(u.id)
-                                .then((data) => {
-                                    if (data.resultCode === 0) {
-                                        props.follow(u.id)
-                                    }
-                                    props.toggleIsFollowing(false, u.id)
-                                })
+                        : <button disabled={props.isFollowing.some(el => el === u.id)} onClick={() => {
+                            props.setFollow(u.id)
                         }}>Follow</button>}
                 </div>
                 <div className={s.user_block}>
