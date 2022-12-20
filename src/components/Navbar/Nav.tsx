@@ -3,21 +3,14 @@ import s from './Nav.module.css';
 import {NavLink} from "react-router-dom";
 import {MyFriends} from "./MyFriends";
 import {friendsType} from "../../redux/sidebarReducer";
-import {AppStoreType} from "../../redux/redux-store";
-import {connect} from "react-redux";
 
-type MapStateToPropsType = {
-    friends: friendsType[]
-}
-const MapStateToProps = (state: AppStoreType):MapStateToPropsType => {
-    return {
-        friends: state.sidebar.friends
-    }
+type NavPropsType = {
+    friends:friendsType[]
 }
 
-const NavContainer = () => {
+export const Nav = (props:NavPropsType) => {
 
-    let friend = friends.map((f) => <MyFriends key={f.id} id={f.id} name={f.name} avatar={f.avatar}/>)
+    let friend = props.friends.map((f) => <MyFriends key={f.id} id={f.id} name={f.name} avatar={f.avatar}/>)
 
     return (
         <nav className={s.nav}>
@@ -46,4 +39,3 @@ const NavContainer = () => {
         </nav>
     )
 }
-export const NavContainer =  connect(MapStateToProps)(Nav)

@@ -3,7 +3,7 @@ import {AppStoreType} from "../../redux/redux-store";
 import {getProfileTC, postType, ProfileType,} from "../../redux/profileReducer";
 import {connect} from "react-redux";
 import {Profile} from "./Profile";
-import {Redirect, RouteComponentProps, withRouter} from "react-router-dom";
+import {RouteComponentProps, withRouter} from "react-router-dom";
 import {WithAuthRedirect} from "../../hoc/withAuthRedirect";
 
 type DispatchPropsType = {

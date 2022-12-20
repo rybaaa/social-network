@@ -1,3 +1,7 @@
+.mainWrapper{
+  background-color: #89989a;
+  min-height: 100vh;
+}
 .app-wrapper {
   display: grid;
   grid-template-areas:
@@ -5,6 +9,9 @@
   "n c";
   grid-template-rows: 5em 1fr;
   grid-template-columns: 20em 1fr;
+  width: 60%;
+  min-height: 100vh;
+  margin: 0 auto;
 }
 
 .app-wrapper-content {
