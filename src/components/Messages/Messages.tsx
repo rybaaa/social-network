@@ -3,18 +3,6 @@ import s from './Messages.module.css'
 import {DialogsItem} from "./DialogsItem/DialogsItem";
 import {MessageItems} from "./MessageItem/MessageItem";
 import {MessagesPropsType} from "./MessagesContainer";
-import {Redirect} from "react-router-dom";
-
-
-// type stateMessagesType = {
-//     state: MessagesPageType
-//     addMessage: (message: string) => void
-//     onChangeHandler: (text: string) => void
-//
-//     // state: MessagesPageType
-//     // // addMessage: (message:string) => void
-//     // dispatch: (action: ActionTypes) => void
-// }
 
 export const Messages = (props: MessagesPropsType) => {
     let dialogsElements = props.dialogsPage.dialogs.map(el => <DialogsItem key={el.id} name={el.name} id={el.id}
@@ -38,8 +26,6 @@ export const Messages = (props: MessagesPropsType) => {
         ></textarea>
         <button onClick={addMessage}>Send</button>
     </div>
-
-    if(!props.isAuth.isAuth) return <Redirect to={'/login'}/>
 
     return (
         <div className={s.dialogs}>

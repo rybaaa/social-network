@@ -4,6 +4,7 @@ import {getProfileTC, postType, ProfileType,} from "../../redux/profileReducer";
 import {connect} from "react-redux";
 import {Profile} from "./Profile";
 import {Redirect, RouteComponentProps, withRouter} from "react-router-dom";
+import {WithAuthRedirect} from "../../hoc/withAuthRedirect";
 
 type DispatchPropsType = {
     getProfileTC: (userId: number) => void
@@ -13,7 +14,6 @@ type MapStateToPropsType = {
     newText: string
     posts: postType[]
     profile: ProfileType
-    isAuth:boolean
 }
 
 type SecondaryProfilePagePropsType = MapStateToPropsType & DispatchPropsType
@@ -36,7 +36,6 @@ class ProfileContainer extends React.Component<PropsType> {
     }
 
     render() {
-        if (!this.props.isAuth) return <Redirect to={'/login'}/>
         return (
             <Profile {...this.props}/>
         )
@@ -48,22 +47,7 @@ let mapStateToProps = (state: AppStoreType): MapStateToPropsType => {
         newText: state.profilePage.newText,
         posts: state.profilePage.posts,
         profile: state.profilePage.profile,
-        isAuth:state.auth.isAuth
     }
 }
-// let dispatchToProps = (dispatch: Dispatch): DispatchPropsType => {
-//     return {
-//         addPost: (post:string) => {
-//             dispatch(addPostAC(post))
-//         },
-//         newTextCallback:(newText:string)=>{
-//             dispatch(newTextCallbackAC(newText))
-//         },
-//         setUserProfile: (profile:any)=> {
-//             dispatch(setUserProfileAC(profile))
-//         }
-//     }
-// }
 
-
-export default connect(mapStateToProps, {getProfileTC})(withRouter(ProfileContainer))
+export default WithAuthRedirect(connect(mapStateToProps, {getProfileTC})(withRouter(ProfileContainer)))
