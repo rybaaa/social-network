@@ -46,4 +46,4 @@ const NavContainer = () => {
         </nav>
     )
 }
-export const NavContainer =  connect(MapStateToProps)(Nav)
+export default connect(MapStateToProps)(NavContainer)
