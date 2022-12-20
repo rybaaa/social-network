@@ -5,6 +5,7 @@ import {connect} from "react-redux";
 import {Profile} from "./Profile";
 import {RouteComponentProps, withRouter} from "react-router-dom";
 import {WithAuthRedirect} from "../../hoc/withAuthRedirect";
+import {compose} from "redux";
 
 type DispatchPropsType = {
     getProfileTC: (userId: number) => void
@@ -50,4 +51,8 @@ let mapStateToProps = (state: AppStoreType): MapStateToPropsType => {
     }
 }
 
-export default WithAuthRedirect(connect(mapStateToProps, {getProfileTC})(withRouter(ProfileContainer)))
+export default compose<React.ComponentType>(
+    WithAuthRedirect,
+    connect(mapStateToProps, {getProfileTC}),
+    withRouter
+)(ProfileContainer);
