@@ -2,12 +2,27 @@
     display:flex;
     flex-direction: row;
     margin: 20px;
-    gap:20px;
+    gap:50px;
     min-height: 200px;
+    align-items: center;
+}
+.info_main_block{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap:20px;
+}
+.info_main_block h3{
+    margin: 0;
+}
+.contact_info_block{
+    display: flex;
+    flex-direction: column;
 }
 
 .about{
     font-style: italic;
+    height: 30px;
 }
 .job{
     display: flex;

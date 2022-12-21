@@ -52,7 +52,7 @@ let mapStateToProps = (state: AppStoreType): MapStateToPropsType => {
 }
 
 export default compose<React.ComponentType>(
-    WithAuthRedirect,
+    // WithAuthRedirect,
     connect(mapStateToProps, {getProfileTC}),
     withRouter
 )(ProfileContainer);
