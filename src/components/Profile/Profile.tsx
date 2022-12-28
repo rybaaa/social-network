@@ -7,6 +7,8 @@ export type ProfilePagePropsType = {
     newText: string
     posts: postType[]
     profile: ProfileType
+    status:string
+    updateStatus:(status:string)=>void
 }
 
 export const Profile = (props: ProfilePagePropsType) => {

@@ -1,24 +1,30 @@
-import React from 'react';
+import React, {ChangeEvent} from 'react';
 import {TextField} from "@mui/material";
-import s from './ProfileInfo.module.css'
 
 type ProfileStatusType = {
     status: string
+    updateStatus: (status: string) => void
 }
 
 export class ProfileStatus extends React.Component<ProfileStatusType> {
     state = {
-        editMode: false
+        editMode: false,
+        status:this.props.status
     }
 
-    activateEditModeOn() {
-        this.state.editMode = true
+    activateEditModeOn = () => {
         this.setState({editMode: true})
     }
 
-    activateEditModeOff() {
-        this.state.editMode = false
+    activateEditModeOff = () => {
         this.setState({editMode: false})
+        this.props.updateStatus(this.state.status)
+    }
+    changeStatusHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        console.log(this.state)
+        this.setState({
+            status:e.currentTarget.value
+        })
     }
 
 
@@ -29,12 +35,13 @@ export class ProfileStatus extends React.Component<ProfileStatusType> {
                 <div>
                     <TextField id="status" variant="standard"
                                autoFocus
-                               value={this.props.status}
-                               onBlur={this.activateEditModeOff.bind(this)}/>
+                               value={this.state.status}
+                               onChange={this.changeStatusHandler}
+                               onBlur={this.activateEditModeOff}/>
                 </div>
                 :
                 <div>
-                    <span onDoubleClick={this.activateEditModeOn.bind(this)}>Status: {this.props.status}</span>
+                    <span onDoubleClick={this.activateEditModeOn}>Status: {this.props.status|| '_____'}</span>
                 </div>
         );
     }
