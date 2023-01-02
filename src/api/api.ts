@@ -34,6 +34,9 @@ export const usersAPI = {
                 return res.data
             })
     },
+    login(values:FormikErrorType) {
+        return instance.post('/auth/login', values)
+    }
 
 }
 
@@ -58,4 +61,11 @@ export const profileAPI = {
                 return res.data
             })
     }
+}
+
+
+export type FormikErrorType = {
+    email?: string
+    password?: string
+    rememberMe?: boolean
 }
