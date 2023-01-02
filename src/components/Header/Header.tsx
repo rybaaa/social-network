@@ -22,7 +22,8 @@ export const Header = (props: HeaderPropsType) => {
             {props.isAuth
                 ? <div className={s.login_block}>
                     <div>
-                        <img alt={'avatar'} className={s.img_avatar} src={props.avatar === null ? avatar : props.avatar}/>
+                        <img alt={'avatar'} className={s.img_avatar}
+                             src={props.avatar === null ? avatar : props.avatar}/>
                     </div>
                     <div className={s.login}>{`Hello ${props.login}!`}</div>
                 </div>

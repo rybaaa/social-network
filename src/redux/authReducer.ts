@@ -1,5 +1,5 @@
 import {Dispatch} from "redux";
-import {FormikErrorType, profileAPI, usersAPI} from "../api/api";
+import {DataLoginType, profileAPI, usersAPI} from "../api/api";
 import avatar from '../assets/img/avatar-svgrepo-com.svg'
 const SET_USER_DATA = 'SET_USER_DATA'
 const SET_AVATAR = 'SET_AVATAR'
@@ -61,7 +61,7 @@ export const authTC = () => {
     }
 }
 
-export const loginTC =(values:FormikErrorType) => {
+export const loginTC =(values:DataLoginType) => {
     usersAPI.login(values)
         .then(res=>{
             return authTC()

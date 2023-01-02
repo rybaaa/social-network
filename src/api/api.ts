@@ -69,3 +69,9 @@ export type FormikErrorType = {
     password?: string
     rememberMe?: boolean
 }
+export type DataLoginType = {
+    email:string
+    password:string
+    rememberMe:boolean
+    captcha?:string
+}

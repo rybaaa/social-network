@@ -4,7 +4,6 @@ import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
 import {postType, ProfileType} from "../../redux/profileReducer";
 
 export type ProfilePagePropsType = {
-    newText: string
     posts: postType[]
     profile: ProfileType
     status:string

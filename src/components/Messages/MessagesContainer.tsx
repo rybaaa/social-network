@@ -1,5 +1,5 @@
 import React from "react";
-import {addMessageAC, DialogsPageType, newMessageTextAC} from "../../redux/dialogsReducer";
+import {addMessageAC, DialogsPageType} from "../../redux/dialogsReducer";
 import {Messages} from "./Messages";
 import {connect} from "react-redux";
 import {compose, Dispatch} from "redux";
@@ -12,7 +12,6 @@ type MapStatePropsType = {
 
 type MapDispatchPropsType = {
     addMessage: (message: string) => void
-    onChangeHandler: (text: string) => void
 }
 
 export type MessagesPropsType = MapStatePropsType & MapDispatchPropsType
@@ -27,15 +26,11 @@ let mapDispatchToProps = (dispatch:Dispatch):MapDispatchPropsType => {
     return {
         addMessage: (message: string) => {
             dispatch(addMessageAC(message));
-            dispatch(newMessageTextAC(''));
-        },
-        onChangeHandler: (text: string) => {
-            dispatch(newMessageTextAC(text))
         }
     }
 }
 
 export const MessagesContainer = compose<React.ComponentType>(
-    WithAuthRedirect,
+    //WithAuthRedirect,
     connect(mapStateToProps, mapDispatchToProps)
 )(Messages)

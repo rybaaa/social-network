@@ -6,7 +6,6 @@ const ADD_POST = 'ADD-POST'
 const NEW_POST_UPDATE_TEXT = 'NEW-POST-UPDATE-TEXT'
 const SET_USER_PROFILE = 'SET_USER_PROFILE'
 const SET_STATUS = 'SET_STATUS'
-const UPDATE_STATUS = 'UPDATE_STATUS'
 
 export type postType = {
     id: string
@@ -39,14 +38,12 @@ export type ProfileType = {
 }
 
 export type ProfilePageType = {
-    newText: string
     posts: postType[]
     profile: ProfileType
     status: string
 }
 
 let initialState: ProfilePageType = {
-    newText: 'Hey',
     posts: [
         {id: v1(), post: 'Today is my birthday', likes: 3},
         {id: v1(), post: 'My first post', likes: 22}
@@ -70,9 +67,7 @@ type ActionType = ReturnType<typeof addPostAC> | ReturnType<typeof newTextCallba
 export const profileReducer = (state: ProfilePageType = initialState, action: ActionType): ProfilePageType => {
     switch (action.type) {
         case ADD_POST:
-            return {...state, posts: [...state.posts, {id: v1(), post: action.post, likes: 0}]}
-        case NEW_POST_UPDATE_TEXT:
-            return {...state, newText: action.newText}
+            return {...state, posts: [{id: v1(), post: action.post, likes: 0}, ...state.posts]}
         case SET_USER_PROFILE:
             return {...state, profile: action.profile}
         case SET_STATUS:

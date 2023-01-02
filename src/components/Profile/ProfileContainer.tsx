@@ -14,7 +14,6 @@ type DispatchPropsType = {
 }
 
 type MapStateToPropsType = {
-    newText: string
     posts: postType[]
     profile: ProfileType
     status: string
@@ -49,7 +48,6 @@ class ProfileContainer extends React.Component<PropsType> {
 
 let mapStateToProps = (state: AppStoreType): MapStateToPropsType => {
     return {
-        newText: state.profilePage.newText,
         posts: state.profilePage.posts,
         profile: state.profilePage.profile,
         status: state.profilePage.status
@@ -57,7 +55,7 @@ let mapStateToProps = (state: AppStoreType): MapStateToPropsType => {
 }
 
 export default compose<React.ComponentType>(
-    WithAuthRedirect,
+    //WithAuthRedirect,
     connect(mapStateToProps, {
         getProfileTC,
         setStatusTC,
