@@ -17,6 +17,7 @@ type MapStateToPropsType = {
     posts: postType[]
     profile: ProfileType
     status: string
+    isAuth:boolean
 }
 
 type SecondaryProfilePagePropsType = MapStateToPropsType & DispatchPropsType
@@ -41,7 +42,7 @@ class ProfileContainer extends React.Component<PropsType> {
 
     render() {
         return (
-            <Profile {...this.props} updateStatus={this.props.updateStatusTC}/>
+            <Profile {...this.props} updateStatus={this.props.updateStatusTC} isAuth={this.props.isAuth}/>
         )
     }
 }
@@ -50,7 +51,8 @@ let mapStateToProps = (state: AppStoreType): MapStateToPropsType => {
     return {
         posts: state.profilePage.posts,
         profile: state.profilePage.profile,
-        status: state.profilePage.status
+        status: state.profilePage.status,
+        isAuth:state.auth.isAuth
     }
 }
 

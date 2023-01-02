@@ -8,6 +8,7 @@ import {WithAuthRedirect} from "../../hoc/withAuthRedirect";
 
 type MapStatePropsType = {
     dialogsPage: DialogsPageType
+    isAuth:boolean
 }
 
 type MapDispatchPropsType = {
@@ -19,6 +20,7 @@ export type MessagesPropsType = MapStatePropsType & MapDispatchPropsType
 let mapStateToProps = (state: AppStoreType): MapStatePropsType => {
     return {
         dialogsPage: state.dialogsPage,
+        isAuth:state.auth.isAuth
     }
 }
 
@@ -31,6 +33,6 @@ let mapDispatchToProps = (dispatch:Dispatch):MapDispatchPropsType => {
 }
 
 export const MessagesContainer = compose<React.ComponentType>(
-    //WithAuthRedirect,
+    WithAuthRedirect,
     connect(mapStateToProps, mapDispatchToProps)
 )(Messages)

@@ -5,6 +5,7 @@ import {MessageItems} from "./MessageItem/MessageItem";
 import {MessagesPropsType} from "./MessagesContainer";
 import {useFormik} from "formik";
 import {Button, FormGroup, TextField} from "@mui/material";
+import {Redirect} from "react-router-dom";
 
 export const Messages = (props: MessagesPropsType) => {
     let dialogsElements = props.dialogsPage.dialogs.map(el => <DialogsItem key={el.id} name={el.name} id={el.id}
@@ -16,7 +17,7 @@ export const Messages = (props: MessagesPropsType) => {
     const addMessage = (message:string) => {
         props.addMessage(message)
     }
-
+    if(!props.isAuth) return <Redirect to={'login'}/>
     return (
         <div className={s.dialogs}>
             <div className={s.dialogItems}>

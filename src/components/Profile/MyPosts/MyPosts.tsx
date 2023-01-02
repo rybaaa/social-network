@@ -1,24 +1,21 @@
-import React, {ChangeEvent} from "react";
+import React from "react";
 import s from './MyPost.module.css';
 import {Post} from "./Post/Post";
 import {ProfilePagePropsType} from "./MyPostsContainer";
 import {useFormik} from "formik";
 import {Button, FormGroup, TextField} from "@mui/material";
 
-// type MyPostsTypes = {
-//     addPost: (post: string) => void
-//     onChangeHandler: (text: string) => void
-//     newText: string
-//     posts: postType[]
-//     // addPost: (post: string) => void
-//     // newTextCallback:(text:string)=>void
-//     // dispatch: (action: ActionTypes) => void
-// }
 
 export const MyPosts = (props: ProfilePagePropsType) => {
-    let postElement = props.profilePage.posts.map(el => <Post key={el.id} id={el.id} post={el.post} likes={el.likes}/>)
+    let postElement = props.profilePage.posts.map(el => <Post
+        key={el.id}
+        id={el.id}
+        post={el.post}
+        likes={el.likes}
+        avatar={props.avatar}
+    />)
 
-    let addPost = (post:string) => {
+    let addPost = (post: string) => {
         props.addPost(post)
     }
     return (
@@ -33,10 +30,10 @@ export const MyPosts = (props: ProfilePagePropsType) => {
 }
 
 type AddPostFormType = {
-    addPost:(post:string)=>void
+    addPost: (post: string) => void
 }
 
-const AddPostForm = (props:AddPostFormType) => {
+const AddPostForm = (props: AddPostFormType) => {
     const formik = useFormik({
         initialValues: {
             post: ''
@@ -57,7 +54,7 @@ const AddPostForm = (props:AddPostFormType) => {
                     maxRows={4}
                     {...formik.getFieldProps('post')}
                 />
-                <Button style={{width:'30px'}} type={'submit'} variant={'contained'} color={'primary'}>
+                <Button style={{width: '30px'}} type={'submit'} variant={'contained'} color={'primary'}>
                     Send
                 </Button>
             </FormGroup>

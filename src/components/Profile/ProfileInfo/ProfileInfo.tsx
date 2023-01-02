@@ -6,11 +6,13 @@ import unchecked from '../../../assets/img/unchecked-svgrepo-com.svg'
 import avatar from '../../../assets/img/avatar-svgrepo-com.svg'
 import {ProfilePagePropsType} from "../Profile";
 import {ProfileStatus} from "./ProfileStatus";
+import {Redirect} from "react-router-dom";
 
 export const ProfileInfo = (props: ProfilePagePropsType) => {
     if (!props.profile) {
         return <Preloader/>
     }
+    if (!props.isAuth) return <Redirect to={'login'}/>
     return (
         <div className={s.info}>
             <div className={s.info_main_block}>

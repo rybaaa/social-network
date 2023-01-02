@@ -8,6 +8,7 @@ import {connect} from "react-redux";
 
 type MapStatePropsType = {
     profilePage:ProfilePageType
+    avatar:string
 }
 
 type MapDispatchPropsType = {
@@ -20,7 +21,8 @@ export type ProfilePagePropsType = MapStatePropsType & MapDispatchPropsType
 
 let mapStateToProps = (state: AppStoreType): MapStatePropsType => {
     return {
-        profilePage:state.profilePage
+        profilePage:state.profilePage,
+        avatar:state.auth.avatar
     }
 }
 

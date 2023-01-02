@@ -1,13 +1,18 @@
 import React from "react";
 import s from './Post.module.css';
-import {postType} from "../../../../redux/profileReducer";
 
+type PostType = {
+    avatar:string
+    id: string
+    post: string
+    likes: number
+}
 
-export const Post = (props: postType) => {
+export const Post = (props: PostType) => {
     return (
         <div className={s.postblock}>
             <img className={s.avatar}
-                 src='https://www.svgrepo.com/show/120282/avatar.svg'></img>
+                 src={props.avatar}></img>
             <div className={s.borderblock}>
                 <div className={s.post}>
                     {props.post}
