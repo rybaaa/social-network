@@ -3,7 +3,6 @@ import {Dispatch} from "redux";
 import {profileAPI} from "../api/api";
 
 const ADD_POST = 'ADD-POST'
-const NEW_POST_UPDATE_TEXT = 'NEW-POST-UPDATE-TEXT'
 const SET_USER_PROFILE = 'SET_USER_PROFILE'
 const SET_STATUS = 'SET_STATUS'
 
@@ -59,8 +58,8 @@ let initialState: ProfilePageType = {
     status: ''
 }
 
-type ActionType = ReturnType<typeof addPostAC> | ReturnType<typeof newTextCallbackAC> |
-    ReturnType<typeof setUserProfileAC>
+type ActionType = ReturnType<typeof addPostAC>
+    |ReturnType<typeof setUserProfileAC>
     | ReturnType<typeof setStatusAC>
 
 
@@ -71,13 +70,12 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Ac
         case SET_USER_PROFILE:
             return {...state, profile: action.profile}
         case SET_STATUS:
-            return {...state, status:action.status}
+            return {...state, status: action.status}
         default:
             return state
     }
 }
 export const addPostAC = (post: string) => ({type: ADD_POST, post} as const)
-export const newTextCallbackAC = (newText: string) => ({type: NEW_POST_UPDATE_TEXT, newText} as const)
 export const setUserProfileAC = (profile: ProfileType) => ({type: SET_USER_PROFILE, profile} as const)
 export const setStatusAC = (status: string) => ({type: SET_STATUS, status} as const)
 
@@ -97,7 +95,7 @@ export const setStatusTC = (id: number) => {
             })
     }
 }
-export const updateStatusTC = (status:string) => {
+export const updateStatusTC = (status: string) => {
     console.log(status)
     return (dispatch: Dispatch) => {
         profileAPI.updateStatus(status)

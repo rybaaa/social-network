@@ -1,5 +1,5 @@
 import React from "react";
-import {addPostAC, newTextCallbackAC, ProfilePageType} from "../../../redux/profileReducer";
+import {addPostAC, ProfilePageType} from "../../../redux/profileReducer";
 import {MyPosts} from "./MyPosts";
 import {AppStoreType} from "../../../redux/redux-store";
 import {Dispatch} from "redux";
@@ -13,7 +13,6 @@ type MapStatePropsType = {
 
 type MapDispatchPropsType = {
     addPost: (post: string) => void
-    onChangePostHandler: (text: string) => void
 }
 
 export type ProfilePagePropsType = MapStatePropsType & MapDispatchPropsType
@@ -30,10 +29,6 @@ let mapDispatchToProps = (dispatch:Dispatch): MapDispatchPropsType => {
     return {
         addPost: (post: string) => {
             dispatch(addPostAC(post));
-            dispatch(newTextCallbackAC(''));
-        },
-        onChangePostHandler: (text: string) => {
-            dispatch(newTextCallbackAC(text));
         }
     }
 }
