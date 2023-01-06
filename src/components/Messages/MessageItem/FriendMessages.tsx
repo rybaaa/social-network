@@ -6,7 +6,7 @@ type addNewMessageType = {
     avatar:string
 }
 
-export const MessageItems = (props: addNewMessageType) => {
+export const FriendMessages = (props: addNewMessageType) => {
 
     return (
             <div className={s.messages}>

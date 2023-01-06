@@ -9,16 +9,10 @@ type addNewMessageType = {
 export const MessageItems = (props: addNewMessageType) => {
 
     return (
+        <div>
             <div className={s.messages}>
-                <div className={s.imageAndText}>
-                    <div>
-                        <img src={props.avatar}/></div>
-                    <div className={s.messageText}>
-                        <div className={s.name}>
-                            {props.message}
-                        </div>
-                    </div>
-                </div>
+                {props.message}
             </div>
+        </div>
     )
 }

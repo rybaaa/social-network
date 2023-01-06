@@ -1,25 +1,24 @@
 import React from "react";
 import s from './Messages.module.css'
 import {DialogsItem} from "./DialogsItem/DialogsItem";
-import {MessageItems} from "./MessageItem/MyMessages";
 import {MessagesPropsType} from "./MessagesContainer";
 import {useFormik} from "formik";
 import {Button, FormGroup, TextField} from "@mui/material";
 import {Redirect} from "react-router-dom";
+import {MessageItems} from "./MessageItem/MyMessages";
 
 export const Messages = (props: MessagesPropsType) => {
     let dialogsElements = props.dialogsPage.dialogs.map(el => <DialogsItem key={el.id} name={el.name} id={el.id}
                                                                            avatar={el.avatar}/>)
-    // let messagesElements = props.dialogsPage.messages.map(el => <MessageItems key={el.id}
-    //                                                                           message={el.message}
-    //                                                                           id={el.id}
-    //                                                                           avatar={props.dialogsPage.dialogs[1].avatar}
-    // />)
+    let messagesElements = props.dialogsPage.messages.map(el => <MessageItems key={el.id}
+                                                                              message={el.message}
+                                                                              avatar={props.dialogsPage.dialogs[1].avatar}
+    />)
 
-    let myMessages =  <MessageItems message={props.dialogsPage.messages[0].message}
-                                    avatar={props.isAuth.avatar}/>
-    let friendMessages =  <MessageItems message={props.dialogsPage.messages[2].message}
-                                    avatar={props.dialogsPage.dialogs[0].avatar}/>
+    // let myMessages =  <MessageItems message={props.dialogsPage.messages[0].message}
+    //                                 avatar={props.isAuth.avatar}/>
+    // let friendMessages =  <MessageItems message={props.dialogsPage.messages[2].message}
+    //                                 avatar={props.dialogsPage.dialogs[0].avatar}/>
 
     const addMessage = (message: string) => {
         props.addMessage(message)
@@ -31,8 +30,7 @@ export const Messages = (props: MessagesPropsType) => {
                 {dialogsElements}
             </div>
             <div className={s.messagesItems}>
-                {myMessages}
-                {friendMessages}
+                {messagesElements}
                 <AddMessageForm addMessage={addMessage}/>
             </div>
         </div>
