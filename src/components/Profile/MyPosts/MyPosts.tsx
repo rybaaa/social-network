@@ -4,6 +4,7 @@ import {Post} from "./Post/Post";
 import {ProfilePagePropsType} from "./MyPostsContainer";
 import {useFormik} from "formik";
 import {Button, FormGroup, TextField} from "@mui/material";
+import {FormikErrorType} from "../../../api/api";
 
 
 export const MyPosts = (props: ProfilePagePropsType) => {
@@ -33,10 +34,24 @@ type AddPostFormType = {
     addPost: (post: string) => void
 }
 
+type PostErrorType = {
+    post?:string
+}
+
 const AddPostForm = (props: AddPostFormType) => {
     const formik = useFormik({
         initialValues: {
             post: ''
+        },
+        validate: (values) => {
+            const errors: PostErrorType = {}
+            if (!values.post) {
+                errors.post = 'Required'
+            }
+            if (!values.post.length) {
+                errors.post = 'At least 1 symbol'
+            }
+            return errors
         },
         onSubmit: values => {
             formik.resetForm()
@@ -47,6 +62,7 @@ const AddPostForm = (props: AddPostFormType) => {
         <form onSubmit={formik.handleSubmit}>
             <FormGroup>
                 <TextField
+                    error={formik.touched.post && Boolean(formik.errors.post)}
                     size={'small'}
                     label="Post"
                     margin="normal"

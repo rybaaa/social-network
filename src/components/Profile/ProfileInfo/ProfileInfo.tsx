@@ -43,8 +43,6 @@ export const ProfileInfo = (props: ProfilePagePropsType) => {
                     <img className={s.img} src={unchecked} alt={'logo false'}/>} </div>
                 <div>My description: {props.profile.lookingForAJobDescription}</div>
             </div>
-
-
         </div>
     )
 }

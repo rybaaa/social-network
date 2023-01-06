@@ -33,6 +33,7 @@ export const Login = () => {
         }
     });
 
+
     return (
         <Grid container justifyContent={'center'}>
             <Grid item justifyContent={'center'}>
@@ -50,6 +51,7 @@ export const Login = () => {
                     <form onSubmit={formik.handleSubmit}>
                         <FormGroup>
                             <TextField
+                                error={formik.touched.email && Boolean(formik.errors.email)}
                                 label="Email"
                                 margin="normal"
                                 {...formik.getFieldProps('email')}
@@ -57,6 +59,7 @@ export const Login = () => {
                             {formik.touched.email && formik.errors.email &&
                                 <div style={{color: 'red'}}>{formik.errors.email}</div>}
                             <TextField
+                                error={formik.touched.password && Boolean(formik.errors.password)}
                                 type="password"
                                 label="Password"
                                 margin="normal"
