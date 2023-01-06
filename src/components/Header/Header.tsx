@@ -1,6 +1,6 @@
 import React from "react";
 import s from './Header.module.css';
-import {NavLink} from "react-router-dom";
+import {Link} from "react-router-dom";
 import avatar from '../../assets/img/avatar-svgrepo-com.svg'
 import loginButton from '../../assets/img/login.svg'
 
@@ -11,9 +11,6 @@ type HeaderPropsType = {
     avatar: string
 }
 
-const onClickHandler = () => {
-    return <NavLink to={'/login'}></NavLink>
-}
 export const Header = (props: HeaderPropsType) => {
     return (
         <div className={s.header}>
@@ -28,7 +25,9 @@ export const Header = (props: HeaderPropsType) => {
                     <div className={s.login}>{`Hello ${props.login}!`}</div>
                 </div>
                 : <div className={s.btn_login}>
-                    <img src={loginButton} onClick={onClickHandler} alt={'login_button'}/>
+                    <Link to='login'>
+                        <img src={loginButton}  alt={'login_button'}/>
+                    </Link>
                 </div>
             }
         </div>
