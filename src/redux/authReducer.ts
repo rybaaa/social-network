@@ -1,6 +1,7 @@
 import {Dispatch} from "redux";
 import {DataLoginType, profileAPI, usersAPI} from "../api/api";
 import avatar from '../assets/img/avatar-svgrepo-com.svg'
+import {setAppErrorAC} from "./appReducer";
 
 const SET_USER_DATA = 'SET_USER_DATA'
 const SET_AVATAR = 'SET_AVATAR'
@@ -68,6 +69,8 @@ export const loginTC = (values: DataLoginType) => {
             .then(res => {
                 if (res.data.resultCode === 0) {
                     dispatch(setUserData(res.data))
+                } else {
+                    dispatch(setAppErrorAC(res.data.messages[0]))
                 }
             })
     }

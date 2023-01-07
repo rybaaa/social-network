@@ -20,19 +20,19 @@ export const Header = (props: HeaderPropsType) => {
                  src='https://i.etsystatic.com/22231521/r/il/4d30c8/2591560002/il_570xN.2591560002_cwao.jpg'></img>
             {props.isAuth
                 ? <div className={s.login_block}>
-                    <LogoutIcon style={{cursor: 'pointer'}} onClick={props.logout} color="primary"/>
-                        <div>
+                    <div>
                         <img alt={'avatar'} className={s.img_avatar}
-                        src={props.avatar === null ? avatar : props.avatar}/>
-                        </div>
-                        <div className={s.login}>{`Hello ${props.login}!`}</div>
-                        </div>
-                        : <div className={s.btn_login}>
-                        <Link to='login'>
-                        <img src={loginButton} alt={'login_button'}/>
-                        </Link>
-                        </div>
-                    }
+                             src={props.avatar === null ? avatar : props.avatar}/>
+                    </div>
+                    <div className={s.login}>{`Hello ${props.login}!`}</div>
+                    <LogoutIcon style={{cursor: 'pointer'}} onClick={props.logout} color="primary"/>
                 </div>
-                )
+                : <div className={s.btn_login}>
+                    <Link to='login'>
+                        <img src={loginButton} alt={'login_button'}/>
+                    </Link>
+                </div>
             }
+        </div>
+    )
+}
