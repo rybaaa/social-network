@@ -1,6 +1,7 @@
 import {Dispatch} from "redux";
 import {DataLoginType, profileAPI, usersAPI} from "../api/api";
 import avatar from '../assets/img/avatar-svgrepo-com.svg'
+
 const SET_USER_DATA = 'SET_USER_DATA'
 const SET_AVATAR = 'SET_AVATAR'
 
@@ -50,20 +51,35 @@ export const authTC = () => {
             .then(data => {
                 if (data.resultCode === 0) {
                     dispatch(setUserData(data.data))
+                    return profileAPI.getProfile(data.data.id)
+                        .then(data => {
+                            dispatch(setAvatar(data.photos.small === null
+                                ? avatar
+                                : data.photos.small))
+                        })
                 }
-                return profileAPI.getProfile(data.data.id)
-            })
-            .then(data => {
-                dispatch(setAvatar(data.photos.small === null
-                    ? avatar
-                    : data.photos.small))
             })
     }
 }
 
-export const loginTC =(values:DataLoginType) => {
-    usersAPI.login(values)
-        .then(res=>{
-            return authTC()
-        })
+export const loginTC = (values: DataLoginType) => {
+    return (dispatch: Dispatch) => {
+        usersAPI.login(values)
+            .then(res => {
+                if (res.data.resultCode === 0) {
+                    dispatch(setUserData(res.data))
+                }
+            })
+    }
+}
+
+export const logoutTC = () => {
+    return (dispatch: Dispatch) => {
+        usersAPI.logout()
+            .then(res => {
+                if (res.data.resultCode === 0) {
+                    dispatch(setUserData(res.data))
+                }
+            })
+    }
 }

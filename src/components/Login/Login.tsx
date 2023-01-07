@@ -2,12 +2,28 @@ import React from 'react';
 import {Button, Checkbox, FormControl, FormControlLabel, FormGroup, FormLabel, Grid, TextField} from "@mui/material";
 import {useFormik} from "formik";
 import {loginTC} from "../../redux/authReducer";
-import {FormikErrorType} from "../../api/api";
-import { useAppDispatch} from "../../redux/redux-store";
+import {DataLoginType, FormikErrorType} from "../../api/api";
+import {AppStoreType} from "../../redux/redux-store";
+import {connect} from "react-redux";
+import {Redirect} from "react-router-dom";
 
+type MapStatePropsType = {
+    isAuth:boolean
+}
 
-export const Login = () => {
-    const dispatch = useAppDispatch
+type MapDispatchPropsType = {
+    loginTC: (values:DataLoginType) => void
+}
+
+type LoginPropsType = MapStatePropsType & MapDispatchPropsType
+
+let mapStateToProps = (state: AppStoreType): MapStatePropsType => {
+    return {
+        isAuth:state.auth.isAuth
+    }
+}
+
+const Login = (props:LoginPropsType) => {
     const formik = useFormik({
         initialValues: {
             email: '',
@@ -28,12 +44,10 @@ export const Login = () => {
         },
         onSubmit: values => {
             formik.resetForm()
-            console.log(values)
-            dispatch(loginTC(values))
+            props.loginTC(values)
         }
     });
-
-
+    if(props.isAuth) return <Redirect to={'profile'}/>
     return (
         <Grid container justifyContent={'center'}>
             <Grid item justifyContent={'center'}>
@@ -83,5 +97,7 @@ export const Login = () => {
         </Grid>
     );
 }
+
+export default connect(mapStateToProps, {loginTC})(Login)
 
 

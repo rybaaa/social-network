@@ -36,6 +36,9 @@ export const usersAPI = {
     },
     login(values:FormikErrorType) {
         return instance.post('/auth/login', values)
+    },
+    logout() {
+        return instance.delete('/auth/login')
     }
 
 }
@@ -54,10 +57,8 @@ export const profileAPI = {
             })
     },
     updateStatus(status:string){
-        console.log(status)
         return instance.put('/profile/status', {status})
             .then(res=>{
-                console.log(res)
                 return res.data
             })
     }

@@ -79,6 +79,7 @@ export const addPostAC = (post: string) => ({type: ADD_POST, post} as const)
 export const setUserProfileAC = (profile: ProfileType) => ({type: SET_USER_PROFILE, profile} as const)
 export const setStatusAC = (status: string) => ({type: SET_STATUS, status} as const)
 
+
 export const getProfileTC = (id: number) => {
     return (dispatch: Dispatch) => {
         profileAPI.getProfile(id)
@@ -96,7 +97,6 @@ export const setStatusTC = (id: number) => {
     }
 }
 export const updateStatusTC = (status: string) => {
-    console.log(status)
     return (dispatch: Dispatch) => {
         profileAPI.updateStatus(status)
             .then(data => {
