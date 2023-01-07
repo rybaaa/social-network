@@ -20,6 +20,7 @@ type MapStateToPropsType = {
     profile: ProfileType
     status: string
     isAuth: boolean
+    authUserId:number | null
 }
 
 type SecondaryProfilePagePropsType = MapStateToPropsType & DispatchPropsType
@@ -36,7 +37,7 @@ class ProfileContainer extends React.Component<PropsType> {
     componentDidMount() {
         let userId = this.props.match.params.userId
         if (!userId) {
-            userId = '26681'
+            userId = `${this.props.authUserId}`
         }
         this.props.getProfileTC(+userId)
         this.props.setStatusTC(+userId)
@@ -55,7 +56,8 @@ let mapStateToProps = (state: AppStoreType): MapStateToPropsType => {
         posts: state.profilePage.posts,
         profile: state.profilePage.profile,
         status: state.profilePage.status,
-        isAuth: state.auth.isAuth
+        isAuth: state.auth.isAuth,
+        authUserId:state.auth.id
     }
 }
 

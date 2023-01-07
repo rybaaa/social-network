@@ -31,7 +31,7 @@ export const authReducer = (state: UserDataType = initialState, action: ActionTy
             return {
                 ...state,
                 ...action.data,
-                isAuth: true
+                isAuth:action.isAuth
             }
         case SET_AVATAR:
             return {
@@ -43,7 +43,7 @@ export const authReducer = (state: UserDataType = initialState, action: ActionTy
             return state
     }
 }
-export const setUserData = (data: UserDataType) => ({type: SET_USER_DATA, data} as const)
+export const setUserData = (data: UserDataType, isAuth:boolean) => ({type: SET_USER_DATA, data, isAuth} as const)
 export const setAvatar = (avatar: string) => ({type: SET_AVATAR, avatar} as const)
 
 export const authTC = () => {
@@ -51,7 +51,7 @@ export const authTC = () => {
         usersAPI.authMe()
             .then(data => {
                 if (data.resultCode === 0) {
-                    dispatch(setUserData(data.data))
+                    dispatch(setUserData(data.data, true))
                     return profileAPI.getProfile(data.data.id)
                         .then(data => {
                             dispatch(setAvatar(data.photos.small === null
@@ -68,7 +68,7 @@ export const loginTC = (values: DataLoginType) => {
         usersAPI.login(values)
             .then(res => {
                 if (res.data.resultCode === 0) {
-                    dispatch(setUserData(res.data))
+                    dispatch(setUserData(res.data.data, true))
                 } else {
                     dispatch(setAppErrorAC(res.data.messages[0]))
                 }
@@ -81,7 +81,7 @@ export const logoutTC = () => {
         usersAPI.logout()
             .then(res => {
                 if (res.data.resultCode === 0) {
-                    dispatch(setUserData(res.data))
+                    dispatch(setUserData(res.data, false))
                 }
             })
     }
