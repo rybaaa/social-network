@@ -58,12 +58,12 @@ let initialState: ProfilePageType = {
     status: ''
 }
 
-type ActionType = ReturnType<typeof addPostAC>
+export type ProfileActionType = ReturnType<typeof addPostAC>
     |ReturnType<typeof setUserProfileAC>
     | ReturnType<typeof setStatusAC>
 
 
-export const profileReducer = (state: ProfilePageType = initialState, action: ActionType): ProfilePageType => {
+export const profileReducer = (state: ProfilePageType = initialState, action: ProfileActionType): ProfilePageType => {
     switch (action.type) {
         case ADD_POST:
             return {...state, posts: [{id: v1(), post: action.post, likes: 0}, ...state.posts]}

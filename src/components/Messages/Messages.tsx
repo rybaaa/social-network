@@ -68,11 +68,14 @@ const AddMessageForm = (props: AddMessagePropsType) => {
         <form onSubmit={formik.handleSubmit}>
             <FormGroup>
                 <TextField
+                    error={formik.touched.message && Boolean(formik.errors.message)}
                     size={'small'}
                     label="Message"
                     margin="normal"
                     {...formik.getFieldProps('message')}
                 />
+                {formik.errors.message &&
+                    <div style={{color: 'red'}}>{formik.errors.message}</div>}
                 <Button type={'submit'} variant={'contained'} color={'primary'}>
                     Send
                 </Button>

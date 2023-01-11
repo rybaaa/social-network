@@ -46,7 +46,7 @@ let initialState: UsersPageType = {
     followingInProgress: []
 }
 
-type ActionType = ReturnType<typeof follow>
+export type UserActionType = ReturnType<typeof follow>
     | ReturnType<typeof unfollow>
     | ReturnType<typeof setUsers>
     | ReturnType<typeof changePage>
@@ -55,7 +55,7 @@ type ActionType = ReturnType<typeof follow>
     | ReturnType<typeof toggleIsFollowingInProgress>
 
 
-export const userReducer = (state: UsersPageType = initialState, action: ActionType): UsersPageType => {
+export const userReducer = (state: UsersPageType = initialState, action: UserActionType): UsersPageType => {
     switch (action.type) {
         case FOLLOW:
             return {

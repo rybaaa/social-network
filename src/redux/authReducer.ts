@@ -7,7 +7,7 @@ const SET_USER_DATA = 'SET_USER_DATA'
 const SET_AVATAR = 'SET_AVATAR'
 
 
-type ActionType = ReturnType<typeof setUserData> | ReturnType<typeof setAvatar>
+export type AuthActionType = ReturnType<typeof setUserData> | ReturnType<typeof setAvatar>
 
 export type UserDataType = {
     id: null | number
@@ -25,7 +25,7 @@ const initialState = {
 }
 
 
-export const authReducer = (state: UserDataType = initialState, action: ActionType): UserDataType => {
+export const authReducer = (state: UserDataType = initialState, action: AuthActionType): UserDataType => {
     switch (action.type) {
         case SET_USER_DATA:
             return {
@@ -48,7 +48,7 @@ export const setAvatar = (avatar: string) => ({type: SET_AVATAR, avatar} as cons
 
 export const authTC = () => {
     return (dispatch: Dispatch) => {
-        usersAPI.authMe()
+        return usersAPI.authMe()
             .then(data => {
                 if (data.resultCode === 0) {
                     dispatch(setUserData(data.data, true))
