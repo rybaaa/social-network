@@ -9,6 +9,14 @@ import {
     UsersType
 } from "../../redux/userReducer";
 import {Users} from "./Users";
+import {
+    getCurrentPage,
+    getFollowingInProgress,
+    getIsFetching,
+    getPagesize,
+    getTotalUsers,
+    getUsers
+} from "../../redux/users-selectors";
 
 type MapStateToPropsType = {
     users: UsersType[]
@@ -57,12 +65,12 @@ export class UsersAPI extends React.Component <UsersPagePropsType> {
 
 let mapStateToProps = (state: AppStoreType): MapStateToPropsType => {
     return {
-        users: state.usersPage.users,
-        pagesize: state.usersPage.pageSize,
-        totalUsers: state.usersPage.totalUsers,
-        currentPage: state.usersPage.currentPage,
-        isFetching:state.usersPage.isFetching,
-        followingInProgress: state.usersPage.followingInProgress
+        users: getUsers(state),
+        pagesize: getPagesize(state),
+        totalUsers: getTotalUsers(state),
+        currentPage: getCurrentPage(state),
+        isFetching:getIsFetching(state),
+        followingInProgress: getFollowingInProgress(state)
     }
 }
 
