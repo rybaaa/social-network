@@ -18,8 +18,12 @@ export const ProfileStatus = (props: ProfileStatusType) => {
     const changeStatusHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
         setStatus(e.currentTarget.value)
     }
+    const onEnterHandler = (e:any)=>{
+        if(e.code==='Enter') activateEditModeOff()
+    }
     useEffect(() => {
-    }, [status])
+        setStatus(props.status)
+    }, [props.status])
     return (
         editMode
             ?
@@ -29,7 +33,9 @@ export const ProfileStatus = (props: ProfileStatusType) => {
                            autoFocus
                            value={status}
                            onChange={changeStatusHandler}
-                           onBlur={activateEditModeOff}/>
+                           onBlur={activateEditModeOff}
+                           onKeyDown={onEnterHandler}
+                />
             </div>
             :
             <div>
