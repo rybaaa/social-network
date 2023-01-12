@@ -1,4 +1,4 @@
-import React, {ChangeEvent} from 'react';
+import React, {ChangeEvent, useEffect, useState} from 'react';
 import {TextField} from "@mui/material";
 
 type ProfileStatusType = {
@@ -6,53 +6,36 @@ type ProfileStatusType = {
     updateStatus: (status: string) => void
 }
 
-export class ProfileStatus extends React.Component<ProfileStatusType> {
-    state = {
-        editMode: false,
-        status: this.props.status
-    }
+export const ProfileStatus = (props: ProfileStatusType) => {
+    const [status, setStatus] = useState(props.status)
+    const [editMode, setEditMode] = useState(false)
 
-    activateEditModeOn = () => {
-        this.setState({editMode: true})
+    const activateEditModeOn = () => setEditMode(true)
+    const activateEditModeOff = () => {
+        setEditMode(false)
+        props.updateStatus(status)
     }
-
-    activateEditModeOff = () => {
-        this.setState({editMode: false})
-        this.props.updateStatus(this.state.status)
+    const changeStatusHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        setStatus(e.currentTarget.value)
     }
-    changeStatusHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        this.setState({
-            status: e.currentTarget.value
-        })
-    }
-
-    componentDidUpdate(prevProps: Readonly<ProfileStatusType>, prevState: Readonly<{}>) {
-        if (prevProps.status !== this.props.status) {
-            this.setState(
-                {status: this.props.status}
-            )
-        }
-    }
-
-
-    render() {
-        return (
-            this.state.editMode
-                ?
-                <div>
-                    <TextField id="status" variant="standard"
-                               autoFocus
-                               value={this.state.status}
-                               onChange={this.changeStatusHandler}
-                               onBlur={this.activateEditModeOff}/>
-                </div>
-                :
-                <div>
-                    <span onDoubleClick={this.activateEditModeOn}>Status: {this.props.status || '_____'}</span>
-                </div>
-        );
-    }
-
+    useEffect(() => {
+    }, [status])
+    return (
+        editMode
+            ?
+            <div>
+                <TextField id="status"
+                           variant="standard"
+                           autoFocus
+                           value={status}
+                           onChange={changeStatusHandler}
+                           onBlur={activateEditModeOff}/>
+            </div>
+            :
+            <div>
+                <span onDoubleClick={activateEditModeOn}>Status: {props.status || '_____'}</span>
+            </div>
+    );
 
 };
 

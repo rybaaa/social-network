@@ -61,7 +61,6 @@ export class UsersAPI extends React.Component <UsersPagePropsType> {
         )
     }
 }
-;
 
 let mapStateToProps = (state: AppStoreType): MapStateToPropsType => {
     return {
@@ -73,29 +72,6 @@ let mapStateToProps = (state: AppStoreType): MapStateToPropsType => {
         followingInProgress: getFollowingInProgress(state)
     }
 }
-
-// let dispatchToProps = (dispatch: Dispatch): DispatchToPropsType => {
-//     return {
-//         follow: (userID: number) => {
-//             dispatch(follow(userID))
-//         },
-//         unfollow: (userID: number) => {
-//             dispatch(unfollow(userID))
-//         },
-//         setUsers: (users) => {
-//             dispatch(setUsers(users))
-//         },
-//         changePage: (page: number) => {
-//             dispatch(changePage(page))
-//         },
-//         setTotalUsers: (count: number) => {
-//             dispatch(setTotalUsers(count))
-//         },
-//         toggleIsFetching: (isFetching:boolean)=> {
-//             dispatch(toggleIsFetching(isFetching))
-//         }
-//     }
-// }
 
 export const UsersContainer = connect(mapStateToProps, {
     setUsers,
