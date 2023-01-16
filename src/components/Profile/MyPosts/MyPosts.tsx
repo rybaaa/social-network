@@ -1,4 +1,4 @@
-import React from "react";
+import React, {memo} from "react";
 import s from './MyPost.module.css';
 import {Post} from "./Post/Post";
 import {ProfilePagePropsType} from "./MyPostsContainer";
@@ -6,7 +6,7 @@ import {useFormik} from "formik";
 import {Button, FormGroup, TextField} from "@mui/material";
 
 
-export const MyPosts = (props: ProfilePagePropsType) => {
+export const MyPosts = memo((props: ProfilePagePropsType) => {
     let postElement = props.profilePage.posts.map(el => <Post
         key={el.id}
         id={el.id}
@@ -27,14 +27,14 @@ export const MyPosts = (props: ProfilePagePropsType) => {
             <div>{postElement}</div>
         </div>
     )
-}
+})
 
 type AddPostFormType = {
     addPost: (post: string) => void
 }
 
 type PostErrorType = {
-    post?:string
+    post?: string
 }
 
 const AddPostForm = (props: AddPostFormType) => {
