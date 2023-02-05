@@ -16,8 +16,6 @@ type HeaderPropsType = {
 export const Header = (props: HeaderPropsType) => {
     return (
         <div className={s.header}>
-            <img alt={'site_logo'} className={s.header_img}
-                 src='https://i.etsystatic.com/22231521/r/il/4d30c8/2591560002/il_570xN.2591560002_cwao.jpg'></img>
             {props.isAuth
                 ? <div className={s.login_block}>
                     <div>

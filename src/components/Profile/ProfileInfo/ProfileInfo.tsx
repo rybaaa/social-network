@@ -17,9 +17,12 @@ export const ProfileInfo = (props: ProfilePagePropsType) => {
         <div className={s.info}>
             <div className={s.info_main_block}>
                 <h3>{props.profile.fullName}</h3>
-                <img className={s.img_profile}
-                     src={props.profile.photos.large == null ? avatar : props.profile.photos.large}
-                     alt={'avatar'}></img>
+                <div className={s.img_profile_block}>
+                    <img className={s.img_profile}
+                         src={props.profile.photos.large == null ? avatar : props.profile.photos.large}
+                         alt={'avatar'}></img>
+                </div>
+
                 <span className={s.about}><ProfileStatus
                     status={props.status}
                     updateStatus={props.updateStatus}

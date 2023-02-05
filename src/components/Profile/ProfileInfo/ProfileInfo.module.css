@@ -1,10 +1,12 @@
 .info {
     display:flex;
     flex-direction: row;
-    margin: 20px;
     gap:50px;
     min-height: 200px;
     align-items: center;
+    width: 80%;
+    margin: 20px auto;
+    justify-content: center;
 }
 .info_main_block{
     display: flex;
@@ -43,5 +45,12 @@
 .img_profile {
     width: 250px;
     height: 250px;
-    border-radius: 120px;
+    border-radius: 1000px;
+}
+.img_profile_block{
+    background: -webkit-linear-gradient(left top, #d97706 0%, #db2777 100%);
+    width: 250px;
+    height: 250px;
+    border-radius: 1000px;
+    padding: 4px;
 }

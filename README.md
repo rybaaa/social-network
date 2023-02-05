@@ -1,4 +1,12 @@
-Social network in TypeScript
+# Social Network
 
-<hr>
-To learn React, check out the [React documentation](https://reactjs.org/).
+Developers social network. Many features still in progress.
+
+## Stack
+
+- [x] React
+- [x] TypeScript
+- [x] Redux
+- [x] React-Router
+- [x] Axios
+- [x] Formik

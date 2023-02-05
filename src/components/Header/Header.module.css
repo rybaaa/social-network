@@ -1,12 +1,15 @@
 .header {
     grid-area: h;
-    background-color: black;
+    background-color: #fff;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
-}
-.header img {
-    height: 100%;
+    padding: 0 30px;
+    box-sizing: border-box;
+    border-width: 0;
+    border-style: solid;
+    border-color: #e5e7eb;
+    height: 66px;
 }
 .btn_login{
     width: 30px;
@@ -15,17 +18,12 @@
     margin-right: 20px;
     background-color: white;
 }
-.login {
-    color: aqua;
-}
 .img_avatar{
     width: 50px;
-    border: 3px solid green;
     border-radius: 30px;
 }
 
 .login_block{
-    padding-right: 20px;
     display: flex;
     align-items: center;
     gap:10px;

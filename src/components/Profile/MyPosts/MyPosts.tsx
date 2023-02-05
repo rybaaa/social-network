@@ -24,7 +24,7 @@ export const MyPosts = memo((props: ProfilePagePropsType) => {
                 My Posts
             </h2>
             <AddPostForm addPost={addPost}/>
-            <div>{postElement}</div>
+            <div className={s.posts}>{postElement}</div>
         </div>
     )
 })
