@@ -81,7 +81,5 @@ const AddMessageForm = (props: AddMessagePropsType) => {
                 </Button>
             </FormGroup>
         </form>
-
-
     )
 }
