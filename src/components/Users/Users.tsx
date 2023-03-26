@@ -4,6 +4,7 @@ import avatar from '../../assets/img/avatar-svgrepo-com.svg'
 import {UsersType} from "../../redux/userReducer";
 import {Preloader} from "../common/Preloader/Preloader";
 import {NavLink} from "react-router-dom";
+import {Button} from "@mui/material";
 
 type UserPropsType = {
     totalUsers: number
@@ -41,19 +42,19 @@ export const Users = (props: UserPropsType) => {
                         <img src={u.photos?.small === null ? avatar : u.photos.small}/>
                     </NavLink>
                     {u.followed
-                        ? <button disabled={props.isFollowing.some(el => el === u.id)} onClick={() => {
+                        ? <Button variant={'outlined'} disabled={props.isFollowing.some(el => el === u.id)} onClick={() => {
                             props.setUnfollow(u.id)
-                        }}>Unfollow</button>
-                        : <button disabled={props.isFollowing.some(el => el === u.id)} onClick={() => {
+                        }} color="secondary">Unfollow</Button>
+                        : <Button variant={'outlined'} disabled={props.isFollowing.some(el => el === u.id)} onClick={() => {
                             props.setFollow(u.id)
-                        }}>Follow</button>}
+                        }} color="secondary">Follow</Button>}
                 </div>
                 <div className={s.user_block}>
                     <div className={s.user_block_info}>
                         <div>{u.name}</div>
                     </div>
                     <div>
-                        <div className={s.status}>{u.status}</div>
+                        <div className={s.status}>Status:{u.status}</div>
                     </div>
                 </div>
             </div>)}
