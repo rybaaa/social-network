@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/social-network/static/css/main.2f677da2.css",
-    "main.js": "/social-network/static/js/main.5f2fdf11.js",
+    "main.css": "/social-network/static/css/main.2fb009d2.css",
+    "main.js": "/social-network/static/js/main.35a767be.js",
     "static/media/inprogress.jpg": "/social-network/static/media/inprogress.3d7be4c28516bb798f72.jpg",
     "static/media/logo.png": "/social-network/static/media/logo.c163cb54c6cfad76f022.png",
     "static/media/avatar-svgrepo-com.svg": "/social-network/static/media/avatar-svgrepo-com.d04e51c6a65ad77c455e041953878408.svg",
@@ -16,11 +16,11 @@
     "static/media/messages.svg": "/social-network/static/media/messages.dc1978e745825ca4fe168b88d0929885.svg",
     "static/media/find.svg": "/social-network/static/media/find.22ae39967106a662ed2895cc4f518195.svg",
     "static/media/checkbox-checked-svgrepo-com.svg": "/social-network/static/media/checkbox-checked-svgrepo-com.6a1caa8e2c2ae1b1706cf3203d1f95aa.svg",
-    "main.2f677da2.css.map": "/social-network/static/css/main.2f677da2.css.map",
-    "main.5f2fdf11.js.map": "/social-network/static/js/main.5f2fdf11.js.map"
+    "main.2fb009d2.css.map": "/social-network/static/css/main.2fb009d2.css.map",
+    "main.35a767be.js.map": "/social-network/static/js/main.35a767be.js.map"
   },
   "entrypoints": [
-    "static/css/main.2f677da2.css",
-    "static/js/main.5f2fdf11.js"
+    "static/css/main.2fb009d2.css",
+    "static/js/main.35a767be.js"
   ]
 }
