@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import {NavContainer} from "./components/Navbar/NavContainer";
-import {BrowserRouter, Route, withRouter} from "react-router-dom";
+import {Route, withRouter} from "react-router-dom";
 import {Music} from "./components/Music/Music";
 import {News} from "./components/News/News";
 import {Settings} from "./components/Settings/Settings";
@@ -33,27 +33,25 @@ class App extends React.Component<AppPropsType> {
     render() {
         if (!this.props.isInitialized) return <Preloader/>
         return (
-            <BrowserRouter>
-                <div className='mainWrapper'>
-                    <div className='app-wrapper'>
-                        <HeaderContainer/>
-                        <NavContainer/>
-                        <ErrorSnackbar/>
-                        <div className='app-wrapper-content'>
-                            <Route path='/profile/:userId?' render={() =>
-                                <ProfileContainer
-                                />}/>
-                            <Route path='/messages' render={() =>
-                                <MessagesContainer/>}/>
-                            <Route path='/users' render={() => <UsersContainer/>}/>
-                            <Route path='/news' render={() => <News/>}/>
-                            <Route path='/music' render={() => <Music/>}/>
-                            <Route path='/settings' render={() => <Settings/>}/>
-                            <Route path='/login' render={() => <Login/>}/>
-                        </div>
+            <div className='mainWrapper'>
+                <div className='app-wrapper'>
+                    <HeaderContainer/>
+                    <NavContainer/>
+                    <ErrorSnackbar/>
+                    <div className='app-wrapper-content'>
+                        <Route path='/profile/:userId?' render={() =>
+                            <ProfileContainer
+                            />}/>
+                        <Route path='/messages' render={() =>
+                            <MessagesContainer/>}/>
+                        <Route path='/users' render={() => <UsersContainer/>}/>
+                        <Route path='/news' render={() => <News/>}/>
+                        <Route path='/music' render={() => <Music/>}/>
+                        <Route path='/settings' render={() => <Settings/>}/>
+                        <Route path='/login' render={() => <Login/>}/>
                     </div>
                 </div>
-            </BrowserRouter>
+            </div>
         );
     }
 }
