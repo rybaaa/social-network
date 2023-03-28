@@ -3,9 +3,11 @@
     flex-direction: column;
     justify-content: center;
     padding: 10px 0;
+    position: relative;
 }
+
 .block {
-    margin: 20px;
+    margin: 70px;
     display: flex;
     justify-content: center;
     gap: 50px;
@@ -41,22 +43,20 @@
     display: flex;
     justify-content: space-between;
 }
+
 .status {
     font-size: 15px;
     font-style: italic;
 }
 
 .pages {
-    display: flex;
-    justify-content: center;
-    gap:10px;
-    font-size: 25px;
-    padding: 20px;
+    position: absolute;
+    top: 20px;
+    left:calc(50% - 175px);
 }
-.page{
-    cursor: pointer;
-}
-.selectedPage{
-    cursor: pointer;
-    font-weight: bold;
+
+.pagesDown{
+    position: absolute;
+    bottom: 20px;
+    left:calc(50% - 175px);
 }
