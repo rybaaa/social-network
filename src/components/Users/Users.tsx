@@ -33,7 +33,7 @@ export const Users = memo((props: UserPropsType) => {
                                                      onChange={onChangePagination} variant="outlined"
                                                      shape="rounded"/>
                 </div>
-                <div> {props.users.map(u => <div key={u.id} className={s.block}>
+                <div className={s.wrapper__block}> {props.users.map(u => <div key={u.id} className={s.block}>
                     <div className={s.avatar_btn_block}>
                         <NavLink to={'/profile/' + u.id} activeClassName={s.activeLink}>
                             <img src={u.photos?.small === null ? avatar : u.photos.small} alt={'avatar'}/>
@@ -57,11 +57,12 @@ export const Users = memo((props: UserPropsType) => {
                         </div>
                     </div>
                 </div>)}
-                    <div className={s.pagesDown}><Pagination count={pagesCount} page={props.currentPage}
-                                                             onChange={onChangePagination} variant="outlined"
-                                                             shape="rounded"/>
-                    </div>
                 </div>
+                <div className={s.pagesDown}><Pagination count={pagesCount} page={props.currentPage}
+                                                         onChange={onChangePagination} variant="outlined"
+                                                         shape="rounded"/>
+                </div>
+                {props.isFetching ? <Preloader/> : null}
             </div>
         )
     }
