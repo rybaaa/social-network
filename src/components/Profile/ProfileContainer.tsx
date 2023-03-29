@@ -34,7 +34,7 @@ type PropsType = RouteComponentProps<PathParamsType> & SecondaryProfilePageProps
 
 
 class ProfileContainer extends React.Component<PropsType> {
-    componentDidMount() {
+    showProfile(){
         let userId = this.props.match.params.userId
         if (!userId) {
             userId = `${this.props.authUserId}`
@@ -44,6 +44,15 @@ class ProfileContainer extends React.Component<PropsType> {
         }
         this.props.getProfileTC(+userId)
         this.props.setStatusTC(+userId)
+    }
+    componentDidMount() {
+        this.showProfile()
+    }
+
+    componentDidUpdate(prevProps: Readonly<PropsType>, prevState: Readonly<{}>, snapshot?: any) {
+        if (this.props.match.params.userId !== prevProps.match.params.userId){
+            this.showProfile()
+        }
     }
 
     render() {
