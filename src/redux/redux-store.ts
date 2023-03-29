@@ -22,7 +22,7 @@ let store = createStore(reducer, applyMiddleware(thunk));
 // @ts-ignore
 window.store = store
 
-type RootReducerType = typeof reducer
+export type RootReducerType = typeof reducer
 export type AppStoreType = ReturnType<RootReducerType>
 
 export type ActionDispatchType = AppActionsType | AuthActionType | ProfileActionType

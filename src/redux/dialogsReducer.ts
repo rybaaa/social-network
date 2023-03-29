@@ -11,6 +11,7 @@ export type dialogsType = {
 export type messagesType = {
     id: string
     message: string
+    avatar:string
 }
 
 export type DialogsPageType = {
@@ -28,10 +29,10 @@ let initialState: DialogsPageType = {
         {id: v1(), name: 'Charles', avatar: 'https://www.svgrepo.com/show/63886/avatar.svg'}
     ],
     messages: [
-        {id: v1(), message: 'Hi'},
-        {id: v1(), message: 'What is your aim?'},
-        {id: v1(), message: 'Good Luck!'},
-        {id: v1(), message: 'Have fun'}
+        {id: v1(), message: 'Hi', avatar: 'https://www.svgrepo.com/show/26325/avatar.svg'},
+        {id: v1(), message: 'What is your aim?', avatar: 'https://www.svgrepo.com/show/26325/avatar.svg'},
+        {id: v1(), message: 'Good Luck!', avatar: 'https://www.svgrepo.com/show/26325/avatar.svg'},
+        {id: v1(), message: 'Have fun', avatar: 'https://www.svgrepo.com/show/26325/avatar.svg'}
     ]
 }
 
@@ -39,10 +40,10 @@ export const dialogsReducer = (state: DialogsPageType = initialState, action: Di
     switch (action.type) {
         case ADD_MESSAGE:
             return {
-                ...state, messages:[...state.messages, {id: v1(), message: action.message}]
+                ...state, messages:[...state.messages, {id: v1(), message: action.message, avatar:action.avatar}]
             }
         default:
             return state
     }
 }
-export const addMessageAC = (message: string) => ({type: ADD_MESSAGE, message} as const)
+export const addMessageAC = (message: string, avatar:string) => ({type: ADD_MESSAGE, message, avatar} as const)

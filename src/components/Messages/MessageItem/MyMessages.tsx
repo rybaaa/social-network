@@ -7,11 +7,11 @@ type addNewMessageType = {
 }
 
 export const MessageItems = (props: addNewMessageType) => {
-
     return (
-        <div>
+        <div className={s.messagesWrapper}>
+            <img className={s.avatar} src={props.avatar} alt={'avatar'}/>
             <div className={s.messages}>
-                {props.message}
+                <span className={s.text}>{props.message}</span>
             </div>
         </div>
     )

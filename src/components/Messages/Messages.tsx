@@ -6,22 +6,19 @@ import {useFormik} from "formik";
 import {Button, FormGroup, TextField} from "@mui/material";
 import {Redirect} from "react-router-dom";
 import {MessageItems} from "./MessageItem/MyMessages";
+import {useSelector} from "react-redux";
+import {AppStoreType} from "../../redux/redux-store";
 
 export const Messages = (props: MessagesPropsType) => {
     let dialogsElements = props.dialogsPage.dialogs.map(el => <DialogsItem key={el.id} name={el.name} id={el.id}
                                                                            avatar={el.avatar}/>)
     let messagesElements = props.dialogsPage.messages.map(el => <MessageItems key={el.id}
                                                                               message={el.message}
-                                                                              avatar={props.dialogsPage.dialogs[1].avatar}
+                                                                              avatar={el.avatar}
     />)
 
-    // let myMessages =  <MessageItems message={props.dialogsPage.messages[0].message}
-    //                                 avatar={props.isAuth.avatar}/>
-    // let friendMessages =  <MessageItems message={props.dialogsPage.messages[2].message}
-    //                                 avatar={props.dialogsPage.dialogs[0].avatar}/>
-
-    const addMessage = (message: string) => {
-        props.addMessage(message)
+    const addMessage = (message: string, avatar: string) => {
+        props.addMessage(message, avatar)
     }
     if (!props.isAuth) return <Redirect to={'login'}/>
     return (
@@ -38,13 +35,14 @@ export const Messages = (props: MessagesPropsType) => {
 }
 
 type AddMessagePropsType = {
-    addMessage: (message: string) => void
+    addMessage: (message: string, avatar: string) => void
 }
 
 type MessageErrorType = {
     message?: string
 }
 const AddMessageForm = (props: AddMessagePropsType) => {
+    const myAvatar = useSelector((state: AppStoreType) => state.profilePage.profile.photos.small)
     const formik = useFormik({
         initialValues: {
             message: ''
@@ -61,7 +59,7 @@ const AddMessageForm = (props: AddMessagePropsType) => {
         },
         onSubmit: values => {
             formik.resetForm()
-            props.addMessage(values.message)
+            props.addMessage(values.message, myAvatar)
         }
     })
     return (
@@ -76,7 +74,7 @@ const AddMessageForm = (props: AddMessagePropsType) => {
                 />
                 {formik.errors.message &&
                     <div style={{color: 'red'}}>{formik.errors.message}</div>}
-                <Button type={'submit'} variant={'contained'} color={'primary'}>
+                <Button style={{width: '100px'}} type={'submit'} variant={'contained'} color={'primary'}>
                     Send
                 </Button>
             </FormGroup>

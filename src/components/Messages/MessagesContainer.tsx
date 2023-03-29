@@ -13,7 +13,7 @@ type MapStatePropsType = {
 }
 
 type MapDispatchPropsType = {
-    addMessage: (message: string) => void
+    addMessage: (message: string, avatar:string) => void
 }
 
 export type MessagesPropsType = MapStatePropsType & MapDispatchPropsType
@@ -27,8 +27,8 @@ let mapStateToProps = (state: AppStoreType): MapStatePropsType => {
 
 let mapDispatchToProps = (dispatch:Dispatch):MapDispatchPropsType => {
     return {
-        addMessage: (message: string) => {
-            dispatch(addMessageAC(message));
+        addMessage: (message: string, avatar:string) => {
+            dispatch(addMessageAC(message, avatar));
         }
     }
 }
