@@ -31,7 +31,7 @@ export const Users = memo((props: UserPropsType) => {
             <div className={s.wrapper}> {props.isFetching ? <Preloader/> : null}
                 <div className={s.pages}><Pagination count={pagesCount} page={props.currentPage}
                                                      onChange={onChangePagination} variant="outlined"
-                                                     shape="rounded"/>
+                                                     shape="rounded" color={'secondary'}/>
                 </div>
                 <div className={s.wrapper__block}> {props.users.map(u => <div key={u.id} className={s.block}>
                     <div className={s.avatar_btn_block}>
@@ -60,7 +60,7 @@ export const Users = memo((props: UserPropsType) => {
                 </div>
                 <div className={s.pagesDown}><Pagination count={pagesCount} page={props.currentPage}
                                                          onChange={onChangePagination} variant="outlined"
-                                                         shape="rounded"/>
+                                                         shape="rounded" color={'secondary'}/>
                 </div>
                 {props.isFetching ? <Preloader/> : null}
             </div>
